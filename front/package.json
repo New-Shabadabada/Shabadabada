@@ -1,0 +1,31 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "@vue/component-compiler-utils": "^3.2.0",
+    "sass": "^1.32.8",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@mdi/font": "^5.9.55",
+    "axios": "^0.21.1",
+    "regenerator-runtime": "^0.13.7",
+    "reset-css": "^5.0.1",
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-router": "^3.5.1",
+    "vuetify": "^2.4.9"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  }
+}

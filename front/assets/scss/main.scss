@@ -1,0 +1,16 @@
+@import "./abstract/variable";
+@import "./abstract/mixins";
+@import "./base/typography";
+
+body  {
+    position: relative;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+
