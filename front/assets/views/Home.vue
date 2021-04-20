@@ -100,30 +100,6 @@ export default {
 
 @import '../scss/main.scss';
 
-// JULIEN test transition
-// .word1 {
-//     display: block;
-//     transition: display 1s;
-// }
-// .bounce1-enter-active {
-//   animation: bounce-in .5s;
-// }
-
-// // .bounce-leave-active {
-// //   animation: bounce-in .5s reverse;
-// // }
-// @keyframes bounce-in {
-//   0% {
-//     transform: scale(0);
-//   }
-//   50% {
-//     transform: scale(1.5);
-//   }
-//   100% {
-//     transform: scale(1);
-//   }
-// }
-
 .home__part1 {
 
     display: flex;
@@ -167,7 +143,6 @@ export default {
         text-shadow: 2px 2px black;
         box-shadow: 3px 3px 0px white;
         outline: none;
-
     }
 }
 
@@ -187,7 +162,6 @@ export default {
             padding-top: 1rem;
             letter-spacing: 0.1rem;
         }
-
 
         h2 {
 
@@ -209,7 +183,6 @@ export default {
         word-spacing: 0.5rem;
         text-shadow: 2px 1.5px $color-pink-f0f;
         margin-top: 4rem;
-        //margin-left: 1rem;
     }   
 
     .home__explanation {
@@ -238,7 +211,6 @@ export default {
 
             .number {
 
-                //display: block;
                 width: 10%;            
                 text-align: center;
                 background-color: $color-yellow;
@@ -258,7 +230,6 @@ export default {
 
                 margin-left: 1rem;
                 width: 80%;
-                //text-align: justify;
                 font-size: 20px;   
             }
         }
@@ -285,7 +256,6 @@ export default {
         text-shadow: 2px 2px black;
         box-shadow: 3px 3px 0px white;
         outline: none;
-
     }
 
 }
@@ -294,16 +264,19 @@ export default {
     margin-bottom: 0px;
 }
 
-// ========= MIXINS / RESPONSIVE ========= 
+// ========= Media queries =========// 
 
 @include screen-small {
+
     .home__part2 h3 {
+
         margin-left: 0;
     }
 }
 @include screen-medium{
 
     .home {
+
         margin-top: $spacing-simple;
     }
 
@@ -354,26 +327,25 @@ export default {
 
         h3,
         .home__explanation {
+
             padding: 0 5rem 0 5rem;
         }
 
         .home__explanation {
+
             font-size: 1.2rem;
         }
 
         .home__explanation .rules .number {
+
             width: 15%;
         }
 
         .button {
+
             margin-top: 3rem;
         }
-
-       
     }
-
-    
-
 } // end of screen-medium
    
    
@@ -386,6 +358,7 @@ export default {
         .word1,
         .word2,
         .word3 {
+
            font-size: 8rem; 
         }
         
@@ -402,8 +375,6 @@ export default {
         .rule2 {
 
             padding-right : 1rem;
-            //border-right: 1px solid $color-yellow;
-            //height : 10rem;
         }
 
     }
@@ -423,12 +394,11 @@ export default {
             .word1,
             .word2,
             .word3 {
-            font-size: 10rem; 
+
+                font-size: 10rem; 
             }
-
-            
-
         }
+        
         .button .button__click-here {
 
             padding: 10px 20px;
@@ -439,12 +409,14 @@ export default {
     }
 
     .home__part2 {
+
         .home__explanation {
 
             flex-direction: row;
             align-items: flex-start;
 
             .rules {
+
                 padding: 0 3rem 0 3rem;
 
                 .rule {
@@ -457,6 +429,7 @@ export default {
 
         h3,
         .home__explanation {
+
             padding: 0 10rem 0 10rem;
         }
 
@@ -465,12 +438,12 @@ export default {
         }
 
         .button .button__play {
+
             padding: 10px 20px;
             margin: 0.5rem 0 $spacing-half 0;
             font-size: 1.5rem;
         }
     }
-   
 }// end of screen-extra-large
 
 
