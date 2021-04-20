@@ -1,172 +1,181 @@
 <template>
+
     <div class="game">
-        <div class="background-popup" :style="bgStyleWhenPopup"></div>
+
         <h1 class="gameTitle" :style="titleOnGameStyle">A toi de jouer !</h1>
+
+        <div class = "musicList">
+            <audio v-on:ended="playSong" class="audio-player0 current" controls :src="source0"></audio>
+            <audio v-on:ended="playSong" class="audio-player1" controls :src="source1"></audio>
+            <audio v-on:ended="playSong" class="audio-player2" controls :src="source2"></audio>
+            <audio v-on:ended="playSong" class="audio-player3" controls :src="source3"></audio>
+            <audio v-on:ended="playSong" class="audio-player4" controls :src="source4"></audio>
+            <audio v-on:ended="playSong" class="audio-player5" controls :src="source5"></audio>
+            <audio v-on:ended="playSong" class="audio-player6" controls :src="source6"></audio>
+            <audio v-on:ended="playSong" class="audio-player7" controls :src="source7"></audio>
+            <audio v-on:ended="playSong" class="audio-player8" controls :src="source8"></audio>
+            <audio v-on:ended="playSong" class="audio-player9" id="lastAudio" controls :src="source9"></audio>
+        </div>
+
+        <div class="question">
+
+            <div :style="progressCircularStyle">
+                <v-progress-circular
+                    :style ="shadowStyleChange"
+                    :button="true"
+                    :progress="progress"
+                    :rotate="270"
+                    :size="150"
+                    :width="15"
+                    :value="value * 3.33"
+                    :legend-value="rating"
+                    :color="color"
+                >
+                    {{ value }}
+                </v-progress-circular>
+            </div>
+
+            <!-- WIP move on the top of field (after "A toi de jouer") - review BUG css after move (in div question ??) -->
+            <!-- Rules game -->
+            <h2  :style="titleNoticeStyle">
+                <i class="fas fa-angle-double-right"></i>
+                <span class='one'>i</span>
+                <span class='two'>m</span>
+                <span class='three'>p</span>
+                <span class='four'>o</span>
+                <span class='five'>r</span>
+                <span class='six'>t</span>
+                <span class='seven'>a</span>
+                <span class='eight'>n</span>
+                <span class='nine'>t</span>
+                <i class="fas fa-angle-double-left"></i>
+            </h2>
+
+            <div class="notice" :style="noticeStyle"> 
+
+                <div>
+                    <p class="notice__title line2">
+                        A lire, si tu veux tout déchirer 
+                    </p>
+                </div>
+
+                <p class="notice__validate"> 
+                    <i class="far fa-hand-point-right"></i> Pour valider ta réponse tu dois <span class="important__bold"> appuyer sur la touche 'ENTRÉE'</span>, ou <span class="important__bold"> sur la touche 'RETOUR' (&#9166;) </span> de ton téléphone.
+                </p>
+
+                <p class="notice__nextButton"> 
+                    <i class="far fa-hand-point-right"></i> <span class="important__underline important__bold "> Le bouton 'SUIVANT' ne valide pas ta réponse,</span> il te permet simplement de <span class="important__bold"> passer à la chanson suivante </span> si tu ne souhaites pas attendre le temps restant. 
+                </p>
+                
+                <p class="notice__extraSpace">
+                    <i class="far fa-hand-point-right"></i> Sur mobile, <span class="important__bold"> ton correcteur orthographique est un coquin </span> et il peut te rajouter un espace après le dernier mot tapé, vérifies à bien le supprimer sous peine de rager !
+                </p> 
+
+                    <p class="notice__points">
+                    <i class="far fa-hand-point-right"></i> Pour chaque extrait diffusé tu as la possibilité de <span class="important__bold"> découvrir le titre et / ou l'artiste </span>. Il faut bien <span class="important__underline important__bold "> séparer tes réponses et les rentrer une par une </span>. Si tu écris l'artiste et le titre à la suite cela ne sera pas pris en compte. Chaque <span class="important__bold">bonne réponse vaut 1 point</span>.  
+                </p> 
+
+            </div>
+            <!-- Rules game -->
+
+            <div class="answer" :style="answerCurrentStyle" >
+
+                <div class="alertBlock">
+                    <p id="alert" class=""></p> <!-- attention keep the empty class, used to add a class 'fail' or 'success' in the method checkUserAnswer--> 
+                </div>
+                
+                <!-- if we want we can use v-on:keyup="checkUserAnswer to validate the user response in "reel time". But need to choose between the 2 because together they create some bugg-->
+                <!-- DOC https://vuejs.org/v2/guide/syntax.html#Attributes -->
+                <input 
+                    id="answer" 
+                    name="answer" 
+                    style="font-family: Montserrat; font-size:14px"
+                    placeholder="Tapez le titre de la chanson ou l'artiste" 
+                    spellcheck="false"
+                    type="text" 
+                    :disabled="readonly" 
+                    v-model="userAnswer" 
+                    v-on:keyup.enter="checkUserAnswer" 
+                />
+                
+            </div>  
+        </div> <!-- end div question -->
+
+        <div class="button" :style="buttonsGameNoneStyle">
+
+            <button 
+                class="button__start" 
+                type="button"
+                v-on:click ="startGame" 
+                :style="startButtonStyle" 
+            >
+                Start
+            <button>
+
+
+                <button 
+                class="button__next" 
+                type="button"
+                v-on:click ="playSong" 
+                :style="nextButtonStyle"
+            >
+                Suivant
+            <button>
+
+        </div>
+
+        
+        <!-- EndGame -->
+        <div class="background-popup" :style="bgStyleWhenPopup"></div>
+
+        
         <h1 class="gameTitle" :style="titleEndGameStyle">Partie terminée ! Envie de remettre ça ?</h1>  
 
         <div class="button" :style="playagainButtonStyle">
 
-             <button 
+            <button 
                     class="button__replay" 
                     type="button"
-                      
+                    
                 >
-                     <router-link :to="{name: 'categoriesList'}" >
+                    <router-link :to="{name: 'categoriesList'}" >
                     Rejouer
                 </router-link>
                 <button>
         </div>
 
-            <!--STEP $emit step 3: we also add a custom event listener onto our component that listens out for 'displayNonePopup'. Our custom listener is waiting for the 'displayNonePopup'event to be fired. It will happen when the string 'displayNonePopup' is emitted from inside the 'popup.vue'-->
-            <shabadabada-popup 
-                class="popup" 
-                @displayNonePopup="displayNonePopup" 
-                :style="stylePopup" 
-                :sentence="this.sentence"
-                :points="this.points"
-                >
-            </shabadabada-popup>
-               
-            <div class = "musicList">
-                <audio v-on:ended="playSong" class="audio-player0 current" controls :src="source0"></audio>
-                <audio v-on:ended="playSong" class="audio-player1" controls :src="source1"></audio>
-                <audio v-on:ended="playSong" class="audio-player2" controls :src="source2"></audio>
-                <audio v-on:ended="playSong" class="audio-player3" controls :src="source3"></audio>
-                <audio v-on:ended="playSong" class="audio-player4" controls :src="source4"></audio>
-                <audio v-on:ended="playSong" class="audio-player5" controls :src="source5"></audio>
-                <audio v-on:ended="playSong" class="audio-player6" controls :src="source6"></audio>
-                <audio v-on:ended="playSong" class="audio-player7" controls :src="source7"></audio>
-                <audio v-on:ended="playSong" class="audio-player8" controls :src="source8"></audio>
-                <audio v-on:ended="playSong" class="audio-player9" id="lastAudio" controls :src="source9"></audio>
-            </div>
+        <!--STEP $emit step 3: we also add a custom event listener onto our component that listens out for 'displayNonePopup'. Our custom listener is waiting for the 'displayNonePopup'event to be fired. It will happen when the string 'displayNonePopup' is emitted from inside the 'popup.vue'-->
+        <shabadabada-popup 
+            class="popup" 
+            @displayNonePopup="displayNonePopup" 
+            :style="stylePopup" 
+            :sentence="this.sentence"
+            :points="this.points"
+            >
+        </shabadabada-popup>
+        <!-- EndGame -->
 
-            <div class="question">
+        <div class="answersBlock" :style="answersBlockStyle">
+            
+            <h3>Vous venez d'écouter :</h3>
 
-                <div :style="progressCircularStyle">
-                    <v-progress-circular
-                        :style ="shadowStyleChange"
-                        :button="true"
-                        :progress="progress"
-                        :rotate="270"
-                        :size="150"
-                        :width="15"
-                        :value="value * 3.33"
-                        :legend-value="rating"
-                        :color="color"
-                    >
-                        {{ value }}
-                    </v-progress-circular>
-                </div>
+            <div class="answersDisplay">
 
-                 <h2  :style="titleNoticeStyle">
-                     <i class="fas fa-angle-double-right"></i>
-                        <span class='one'>i</span>
-                        <span class='two'>m</span>
-                        <span class='three'>p</span>
-                        <span class='four'>o</span>
-                        <span class='five'>r</span>
-                        <span class='six'>t</span>
-                        <span class='seven'>a</span>
-                        <span class='eight'>n</span>
-                        <span class='nine'>t</span>
-                     <i class="fas fa-angle-double-left"></i>
-                </h2>
+                <div class="answerDisplay" v-for="answer in answers" :key="answer[0]">
 
-                <div class="notice" :style="noticeStyle"> 
+                    <img class="imgAnswer" :src="answer[3]" alt="">
 
-                    <div>
-                        <p class="notice__title line2">
-                            A lire, si tu veux tout déchirer 
-                        </p>
-                    </div>
+                    <div class="titleAndArtistAnswer">
 
-                    <p class="notice__validate"> 
-                        <i class="far fa-hand-point-right"></i> Pour valider ta réponse tu dois <span class="important__bold"> appuyer sur la touche 'ENTRÉE'</span>, ou <span class="important__bold"> sur la touche 'RETOUR' (&#9166;) </span> de ton téléphone.
-                    </p>
-
-                    <p class="notice__nextButton"> 
-                       <i class="far fa-hand-point-right"></i> <span class="important__underline important__bold "> Le bouton 'SUIVANT' ne valide pas ta réponse,</span> il te permet simplement de <span class="important__bold"> passer à la chanson suivante </span> si tu ne souhaites pas attendre le temps restant. 
-                    </p>
-                    
-                    <p class="notice__extraSpace">
-                        <i class="far fa-hand-point-right"></i> Sur mobile, <span class="important__bold"> ton correcteur orthographique est un coquin </span> et il peut te rajouter un espace après le dernier mot tapé, vérifies à bien le supprimer sous peine de rager !
-                    </p> 
-
-                     <p class="notice__points">
-                        <i class="far fa-hand-point-right"></i> Pour chaque extrait diffusé tu as la possibilité de <span class="important__bold"> découvrir le titre et / ou l'artiste </span>. Il faut bien <span class="important__underline important__bold "> séparer tes réponses et les rentrer une par une </span>. Si tu écris l'artiste et le titre à la suite cela ne sera pas pris en compte. Chaque <span class="important__bold">bonne réponse vaut 1 point</span>.  
-                    </p> 
-
-                </div>
-
-                <div class="answer" :style="answerCurrentStyle" >
-
-                    <div class="alertBlock">
-                        <p id="alert" class=""></p> <!-- attention keep the empty class, used to add a class 'fail' or 'success' in the method checkUserAnswer--> 
-                    </div>
-                    
-                    <!-- if we want we can use v-on:keyup="checkUserAnswer to validate the user response in "reel time". But need to choose between the 2 because together they create some bugg-->
-                    <!-- DOC https://vuejs.org/v2/guide/syntax.html#Attributes -->
-                    <input 
-                        id="answer" 
-                        name="answer" 
-                        style="font-family: Montserrat; font-size:14px"
-                        placeholder="Tapez le titre de la chanson ou l'artiste" 
-                        spellcheck="false"
-                        type="text" 
-                        :disabled="readonly" 
-                        v-model="userAnswer" 
-                        v-on:keyup.enter="checkUserAnswer" 
-                    />
-                    
-                </div>  
-            </div>
-
-            <div class="button" :style="buttonsGameNoneStyle">
-
-                <button 
-                    class="button__start" 
-                    type="button"
-                    v-on:click ="startGame" 
-                    :style="startButtonStyle" 
-                >
-                    Start
-                <button>
-
-
-                 <button 
-                    class="button__next" 
-                    type="button"
-                    v-on:click ="playSong" 
-                    :style="nextButtonStyle"
-                >
-                    Suivant
-                <button>
-
-            </div>
-
-
-            <div class="answersBlock" :style="answersBlockStyle">
-                
-                <h3>Vous venez d'écouter :</h3>
-
-                <div class="answersDisplay">
-
-                    <div class="answerDisplay" v-for="answer in answers" :key="answer[0]">
-
-                        <img class="imgAnswer" :src="answer[3]" alt="">
-
-                        <div class="titleAndArtistAnswer">
-
-                            <p class="titleAnswer">{{answer[2]}}</p>
-                            <p class="artistAnswer">{{answer[1]}}</p>
-
-                        </div>
+                        <p class="titleAnswer">{{answer[2]}}</p>
+                        <p class="artistAnswer">{{answer[1]}}</p>
 
                     </div>
 
                 </div>
-            </div>
 
+            </div>
+        </div>
     </div> <!--end of div game-->
 </template>
 
