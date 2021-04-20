@@ -1,11 +1,12 @@
 console.log('%c' + "Main.js loaded", 'color: #0bf; font-size: 1rem; background-color:#fff');
 
 import 'reset-css';
-import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/css/all.css';
 import "../scss/main";
 
 // IMPORTANT for async function ! if not imported impossible to use a async function/method
-import 'regenerator-runtime/runtime'
+// DOC https://www.npmjs.com/package/regenerator-runtime
+import 'regenerator-runtime/runtime';
 
 
 // ==============  vuejs import ============== 
@@ -14,19 +15,15 @@ import Application from "../Application";
 
 // ==============  vuetify import ============== 
 // Vuetify import (framemework vuetify)
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.css'
-import '@mdi/font/css/materialdesignicons.min.css'
-
-
-
-
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.css';
+import '@mdi/font/css/materialdesignicons.min.css';
 
 
 // Vuetify configuration with vuejs 
-Vue.use(Vuetify)
-const opts = {}
-const vuetifyInstance = new Vuetify(opts)
+Vue.use(Vuetify);
+const opts = {};
+const vuetifyInstance = new Vuetify(opts);
 
 
 // ============== routerjs application ============== 
@@ -47,5 +44,5 @@ let shabadabada = new Vue({
 
     // inject router
     router,
-})
+});
 
