@@ -2,8 +2,7 @@ console.log('%c' + "Main.js loaded", 'color: #0bf; font-size: 1rem; background-c
 
 import 'reset-css';
 import '@fortawesome/fontawesome-free/css/all.css'
-import "./scss/main";
-import "./javascript/carrousel";
+import "../scss/main";
 
 // IMPORTANT for async function ! if not imported impossible to use a async function/method
 import 'regenerator-runtime/runtime'
@@ -11,7 +10,7 @@ import 'regenerator-runtime/runtime'
 
 // ==============  vuejs import ============== 
 import Vue from 'vue';
-import Application from "./Application.vue";
+import Application from "../Application";
 
 // ==============  vuetify import ============== 
 // Vuetify import (framemework vuetify)

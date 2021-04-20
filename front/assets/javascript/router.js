@@ -9,19 +9,23 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //loading components
-import Home from './views/Home';
-import CategoriesList from './views/CategoriesList';
-import Game from './views/Game';
-import Error404 from './views/Error404';
-import Team from './views/Team';
-import Carrousel from './views/Carrousel';
+import Home from '../views/Home';
+import CategoriesList from '../views/CategoriesList';
+import Game from '../views/Game';
+import Error404 from '../views/Error404';
+import Team from '../views/Team';
 
 // vuejs routes configuration to use the router
 Vue.use(VueRouter);
 
-import Configuration from './Configuration';
-const configuration = new Configuration();
-//let test = configuration.getBaseURI();
+//======================================================================================//
+// WIP TEST CONFIGURATION
+//
+// import Configuration from './Configuration';
+// const configuration = new Configuration();
+// let test = configuration.getBaseURI();
+//======================================================================================//
+
 
 // router configuration
 const router = new VueRouter({
@@ -57,12 +61,6 @@ const router = new VueRouter({
       path: '/team', 
       component: Team
     },
-    {
-      name: 'carrousel', 
-      path: '/carrousel', 
-      component: Carrousel
-    },
-    
   ]
 });
 

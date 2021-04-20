@@ -32,8 +32,6 @@ import Error404 from './views/Error404';
 import Game from './views/Game';
 import Home from './views/Home';
 import Team from './views/Team';
-import Carrousel from './views/Carrousel';
-
 
 
 export default {
@@ -46,8 +44,6 @@ export default {
         'shabadabada-game': Game,
         'shabadabada-home': Home,
         'shabadabada-team': Team,
-        'shabadabada-carrousel': Carrousel,
-
     },
 };
 
@@ -61,7 +57,6 @@ export default {
     margin: 0 auto;
     background-image: url("./images/background-long.jpg");
     background-size: cover;
-    //background-repeat: repeat-x;
     background-attachment: fixed;
     width: 100%;
 }
@@ -82,6 +77,5 @@ main {
         align-self: flex-end;
     }
 }
-
 
 </style>
