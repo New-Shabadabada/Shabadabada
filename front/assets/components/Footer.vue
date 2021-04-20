@@ -1,10 +1,15 @@
 <template>
+
     <footer> 
+
         <div class="footer">
+
             <div class="text-footer">
                 <p> Ce site est fait avec <i class="fas fa-heart"></i> </p> 
             </div>
+
             <div class="copyright-footer">
+
                 <p class="copyright-oz">
                     Copyright <i class="far fa-copyright"></i> 2021 - Promo Oz 
                 </p> 
@@ -16,24 +21,30 @@
                 <p class="copyright-bg">
                     Fond vecteur créé par rawpixel.com - <a href="https://fr.freepik.com/vecteurs/fond"> fr.freepik.com</a>
                 </p>
+
             </div>
+
         </div>
+
     </footer>
+
 </template>
 
 <script>
-export default {
-    name: 'shabadabada-footer',
-    components: {
 
-    },  
+export default {
+
+    name: 'shabadabada-footer', 
 }
+
 </script>
 
 <style scoped lang="scss">
+
 @import '../scss/main.scss';
 
 footer {
+
     width: 100%;
     background-color: #12013f;
     color: $color-turquoise;
@@ -44,6 +55,7 @@ footer {
 }
 
 .text-footer {
+
     font-size: 0.9rem;
     color: $color-pink-f0f;
     font-family: "Lazer84";
@@ -52,6 +64,7 @@ footer {
 
 
 .copyright-footer {
+
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -59,18 +72,19 @@ footer {
     .copyright-oz,
     .copyright-icons,
     .copyright-bg {
+
         width: 100%;
-         
-        
     }
 
     .copyright-bg {
+
         margin-left: $spacing-simple;
     }
 
 
     .copyright-oz,
     .copyright-icons {
+
         border-right: 1px solid $color-turquoise;
         padding-right: $spacing-simple;
         padding-left: $spacing-simple;
@@ -82,16 +96,16 @@ footer {
 
 }
 .copyright-footer p {
+
     margin: unset;
-   
 }
 
 @include screen-large {
 
     .copyright-footer {
+
        justify-content: center; 
     }
- 
 }
 
 </style>

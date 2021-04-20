@@ -1,20 +1,23 @@
 <template>
+
     <header class="header">
+
         <div class="main-menu">  
 
-           <div class="logo">
-            <router-link :to="{name: 'home'}">
-                <img class="logoMobile" src="../images/Logo_mobile.png" />
-                <!--<img class="logo" src="../images/Logo.png" />-->
-            </router-link>
+            <div class="logo">
 
-            <div class="logoText">
                 <router-link :to="{name: 'home'}">
-                    <h1>Shabadabada</h1>
+                    <img class="logoMobile" src="../images/Logo_mobile.png" />
                 </router-link>
-            </div>
+
+                <div class="logoText">
+                    <router-link :to="{name: 'home'}">
+                        <h1>Shabadabada</h1>
+                    </router-link>
+                </div>
             
-           </div>
+            </div>
+
             <div class="main-menu__category main-menu__item">
                 <router-link :to="{name: 'categoriesList'}">
                     Catégories
@@ -28,20 +31,22 @@
             </div>
 
         </div>
+
     </header>
+
 </template>
 
 <script>
-export default {
-    name: 'shabadabada-header',
-    components: {
 
-    },  
+export default {
+
+    name: 'shabadabada-header',  
 }
 
 </script>
 
 <style scoped lang="scss">
+
 @import '../scss/main.scss';
 
 .header {
@@ -56,7 +61,6 @@ export default {
         display: flex;
         justify-content: space-around;  
         align-items: center;
-        
     }
 
     .main-menu__item{
@@ -65,8 +69,7 @@ export default {
         font-size: 18px;
         font-weight: bold;
         text-shadow: 1px 1px white;
-        letter-spacing: 0.3rem;
-        
+        letter-spacing: 0.3rem;  
     }
 
     .logo {
@@ -76,25 +79,25 @@ export default {
 
     .logoText {
 
-            display: none;
-            padding-top: 0.2rem;
-        }
-    
-
-   
+        display: none;
+        padding-top: 0.2rem;
+    }
 }
 
 .v-application a {
 
-        color:$color-pink-f0f;
-        text-decoration: none;
-    }
+    color:$color-pink-f0f;
+    text-decoration: none;
+}
 
-    .v-application p {
+.v-application p {
 
-        margin: unset; 
-        padding: unset;
-    }
+    margin: unset; 
+    padding: unset;
+}
+
+
+//===== Media queries =====// 
 
 @include screen-medium {
 
@@ -125,13 +128,11 @@ export default {
 @include screen-extra-large {
 
     .header {
+
         .main-menu__item {
             font-size: 1.5rem;
         }
     }
-    
 }
-
-
 
 </style>
