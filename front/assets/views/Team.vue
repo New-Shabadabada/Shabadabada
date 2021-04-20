@@ -42,68 +42,81 @@
                       </div>
                     </v-flex>
                   </v-layout>
+
               </v-container>
+
             </v-carousel-item>
+
            </v-carousel>
+
         </v-flex>
+
       </v-layout>
+
     </v-container>
+
 </template>
 
 <script>
 
 export default {
+
     name: "shabadabada-team",
+
     data () {
+
       return {
+
          items: [
-        {
-          src: require('../images/amande.jpg')
-        },
-        {
-          src: require('../images/jd.jpg')
-        },
-        {
-          src: require('../images/solene.jpg')
-        },
+          {
+            src: require('../images/amande.jpg')
+          },
+          {
+            src: require('../images/jd.jpg')
+          },
+          {
+            src: require('../images/solene.jpg')
+          },
         
-      ],
+        ],
      
 
-      slides: [
-        'Amandine Floucaut',
-        'JD Stibling',
-        'Solène Pilliard',
-      ],
-    
-      motto: [
-        'Elle attend que le monde change',
-        'Il jouait du piano debout',
-        'Elle est pas d\'accord, elle est passionnée',
-      ],
+        slides: [
+          'Amandine Floucaut',
+          'JD Stibling',
+          'Solène Pilliard',
+        ],
+      
+        motto: [
+          'Elle attend que le monde change',
+          'Il jouait du piano debout',
+          'Elle est pas d\'accord, elle est passionnée',
+        ],
 
-      role: [
-        'Git master & Lead dev back',
-        'Scrum master & Lead dev front',
-        'Product owner & dev fullstack',
-      ]
+        role: [
+          'Git master & Lead dev back',
+          'Scrum master & Lead dev front',
+          'Product owner & dev fullstack',
+        ]
       }
     },
-     
 }
 
 </script>
 
 
 <style scoped lang="scss">
+
 @import '../scss/main.scss';
 
 .container{
+
   min-height: 100vh;
   height : 100%;
 
   
   .carousel{
+
     box-shadow: 1px 1px 8px rgba(172, 168, 168,1);
 
     .name,
@@ -114,25 +127,26 @@ export default {
   }
 
   .v-layout {
+
     font-family: "Montserrat";
   }
 
   .motto{
 
-      //height: 4rem;
-      align-self: flex-end;
-      font-size: 1.2rem;
-      text-align: center;
-      font-family: "Lazer84";
-      color: black;
-      background-color: rgba(194, 190, 190, 0.4);
-      text-shadow: 2px 2px $color-turquoise;
-      word-spacing: 0.3rem;
-      letter-spacing: 0.1rem;
+    align-self: flex-end;
+    font-size: 1.2rem;
+    text-align: center;
+    font-family: "Lazer84";
+    color: black;
+    background-color: rgba(194, 190, 190, 0.4);
+    text-shadow: 2px 2px $color-turquoise;
+    word-spacing: 0.3rem;
+    letter-spacing: 0.1rem;
 
-      span{
-        padding-top : 0.5rem;
-      }
+    span{
+
+      padding-top : 0.5rem;
+    }
   }
   
   .titlePage{
@@ -157,27 +171,25 @@ export default {
 
 }
 
+// ========= Media queries =========// 
   
 @include screen-small{
-.container{
-  
-  .motto{
-      height: 3.2rem; 
-      max-height : 8rem;
-      font-size: 0.7rem;
-      padding-top : 0rem;
-      padding-bottom: 1rem;
-      margin-top :10.1rem;
-      span{
-        display : block;
-        //margin : auto 1rem auto 1rem;
-        padding-top : 0.3rem;
-      }
+
+  .container{
+    
+    .motto{
+        height: 3.2rem; 
+        max-height : 8rem;
+        font-size: 0.7rem;
+        padding-top : 0rem;
+        padding-bottom: 1rem;
+        margin-top :10.1rem;
+        span{
+          display : block;
+          padding-top : 0.3rem;
+        }
+    }
   }
-  
-}
-
-
 }
 
 h1 {
@@ -191,30 +203,30 @@ h1 {
 }
     
 @include screen-medium{
-.container{
 
-  .motto{
-      height: 3.5rem;
-      //max-height: 8rem;
-      font-size: 1rem;
-      //padding-left : auto;
-      //padding-right : auto;
-      margin-top : 9.8rem;
-      span{
-        display : block;
-        margin : auto;
-        padding-top : 0.5rem;
-        text-align: center;
-      }
-  }
-  
-  
-}
-}
-@include screen-large{
   .container{
 
-  
+    .motto{
+
+        height: 3.5rem;
+        font-size: 1rem;
+        margin-top : 9.8rem;
+
+        span{
+
+          display : block;
+          margin : auto;
+          padding-top : 0.5rem;
+          text-align: center;
+        }
+    }
+  }
+}
+
+@include screen-large{
+
+  .container{
+
     .motto{
         height:3rem;
         font-size: 1.1rem;
@@ -226,8 +238,6 @@ h1 {
           text-align: center;
         }
     }
-    
-    
   }
 }
 
