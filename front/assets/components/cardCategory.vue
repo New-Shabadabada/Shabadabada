@@ -26,6 +26,7 @@ export default {
     data: function() {
         return {
             // TODO change this if needed
+            // WIP manage configuration's dev and configuration's prod
             getGameStartEndPoint: 'http://localhost/Shabadabada/public/wp-json/shabadabada/v1/create-game',
             //getGameStartEndPoint: 'http://' + document.location.host + '/apo-Shabadabada/public/wp-json/shabadabada/v1/create-game',
             // getGameStartEndPoint: './apo-Shabadabada/public/wp-json/shabadabada/v1/create-game',

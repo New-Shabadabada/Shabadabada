@@ -1,4 +1,4 @@
-// not use for now but useful to dynamise the endpoint later
+// WIP not use for now but useful to dynamise the endpoint later
 // console.log('%c' + "configuration.js loaded", 'color: #0bf; font-size: 1rem; background-color:#fff');
 
 
@@ -19,8 +19,6 @@ environments = {
     development : {
         regex: /localhost/,
         apiURLRoot: 'http://localhost/Shabadabada/public/front',
-        //baseURI: '/public/front',
-        
     },
 
     production : {
