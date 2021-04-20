@@ -12,8 +12,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home';
 import CategoriesList from '../views/CategoriesList';
 import Game from '../views/Game';
-import Error404 from '../views/Error404';
 import Team from '../views/Team';
+import Error404 from '../views/Error404';
 
 // vuejs routes configuration to use the router
 Vue.use(VueRouter);
