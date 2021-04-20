@@ -33,7 +33,7 @@
 //=============== IMPORT ================ 
 
 import axios from "axios";
-import cardCategory from "../components/cardCategory";
+import CardCategory from "../components/CardCategory";
 
 //======================================
 
@@ -49,7 +49,7 @@ export default {
     },
 
     components: {
-        cardCategory
+        CardCategory
     },
     
     props: {

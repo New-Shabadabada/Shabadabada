@@ -20,7 +20,7 @@
 
 <script>
 
-import cardCategory from "../components/cardCategory";
+import CardCategory from "../components/CardCategory";
 import axios from "axios";
 
 export default {
@@ -51,7 +51,7 @@ export default {
 
     components: {
 
-        cardCategory
+        CardCategory
     }
 };
 
