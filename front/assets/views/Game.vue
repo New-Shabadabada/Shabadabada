@@ -4,6 +4,50 @@
 
         <h1 class="gameTitle" :style="titleOnGameStyle">A toi de jouer !</h1>
 
+        
+        <!-- Rules game -->
+        <h2  :style="titleNoticeStyle">
+            <i class="fas fa-angle-double-right"></i>
+            <span class='one'>i</span>
+            <span class='two'>m</span>
+            <span class='three'>p</span>
+            <span class='four'>o</span>
+            <span class='five'>r</span>
+            <span class='six'>t</span>
+            <span class='seven'>a</span>
+            <span class='eight'>n</span>
+            <span class='nine'>t</span>
+            <i class="fas fa-angle-double-left"></i>
+        </h2>
+
+        <div class="notice" :style="noticeStyle"> 
+
+            <div>
+                <p class="notice__title line2">
+                    A lire, si tu veux tout déchirer 
+                </p>
+            </div>
+
+            <p class="notice__validate"> 
+                <i class="far fa-hand-point-right"></i> Pour valider ta réponse tu dois <span class="important__bold"> appuyer sur la touche 'ENTRÉE'</span>, ou <span class="important__bold"> sur la touche 'RETOUR' (&#9166;) </span> de ton téléphone.
+            </p>
+
+            <p class="notice__nextButton"> 
+                <i class="far fa-hand-point-right"></i> <span class="important__underline important__bold "> Le bouton 'SUIVANT' ne valide pas ta réponse,</span> il te permet simplement de <span class="important__bold"> passer à la chanson suivante </span> si tu ne souhaites pas attendre le temps restant. 
+            </p>
+            
+            <p class="notice__extraSpace">
+                <i class="far fa-hand-point-right"></i> Sur mobile, <span class="important__bold"> ton correcteur orthographique est un coquin </span> et il peut te rajouter un espace après le dernier mot tapé, vérifies à bien le supprimer sous peine de rager !
+            </p> 
+
+                <p class="notice__points">
+                <i class="far fa-hand-point-right"></i> Pour chaque extrait diffusé tu as la possibilité de <span class="important__bold"> découvrir le titre et / ou l'artiste </span>. Il faut bien <span class="important__underline important__bold "> séparer tes réponses et les rentrer une par une </span>. Si tu écris l'artiste et le titre à la suite cela ne sera pas pris en compte. Chaque <span class="important__bold">bonne réponse vaut 1 point</span>.  
+            </p> 
+
+        </div>
+        <!-- end Rules game -->
+
+        <!-- WIP create loop for audio's tags -->
         <div class = "musicList">
             <audio v-on:ended="playSong" class="audio-player0 current" controls :src="source0"></audio>
             <audio v-on:ended="playSong" class="audio-player1" controls :src="source1"></audio>
@@ -35,48 +79,7 @@
                 </v-progress-circular>
             </div>
 
-            <!-- WIP move on the top of field (after "A toi de jouer") - review BUG css after move (in div question ??) -->
-            <!-- Rules game -->
-            <h2  :style="titleNoticeStyle">
-                <i class="fas fa-angle-double-right"></i>
-                <span class='one'>i</span>
-                <span class='two'>m</span>
-                <span class='three'>p</span>
-                <span class='four'>o</span>
-                <span class='five'>r</span>
-                <span class='six'>t</span>
-                <span class='seven'>a</span>
-                <span class='eight'>n</span>
-                <span class='nine'>t</span>
-                <i class="fas fa-angle-double-left"></i>
-            </h2>
-
-            <div class="notice" :style="noticeStyle"> 
-
-                <div>
-                    <p class="notice__title line2">
-                        A lire, si tu veux tout déchirer 
-                    </p>
-                </div>
-
-                <p class="notice__validate"> 
-                    <i class="far fa-hand-point-right"></i> Pour valider ta réponse tu dois <span class="important__bold"> appuyer sur la touche 'ENTRÉE'</span>, ou <span class="important__bold"> sur la touche 'RETOUR' (&#9166;) </span> de ton téléphone.
-                </p>
-
-                <p class="notice__nextButton"> 
-                    <i class="far fa-hand-point-right"></i> <span class="important__underline important__bold "> Le bouton 'SUIVANT' ne valide pas ta réponse,</span> il te permet simplement de <span class="important__bold"> passer à la chanson suivante </span> si tu ne souhaites pas attendre le temps restant. 
-                </p>
-                
-                <p class="notice__extraSpace">
-                    <i class="far fa-hand-point-right"></i> Sur mobile, <span class="important__bold"> ton correcteur orthographique est un coquin </span> et il peut te rajouter un espace après le dernier mot tapé, vérifies à bien le supprimer sous peine de rager !
-                </p> 
-
-                    <p class="notice__points">
-                    <i class="far fa-hand-point-right"></i> Pour chaque extrait diffusé tu as la possibilité de <span class="important__bold"> découvrir le titre et / ou l'artiste </span>. Il faut bien <span class="important__underline important__bold "> séparer tes réponses et les rentrer une par une </span>. Si tu écris l'artiste et le titre à la suite cela ne sera pas pris en compte. Chaque <span class="important__bold">bonne réponse vaut 1 point</span>.  
-                </p> 
-
-            </div>
-            <!-- Rules game -->
+           
 
             <div class="answer" :style="answerCurrentStyle" >
 
@@ -113,7 +116,7 @@
             <button>
 
 
-                <button 
+            <button 
                 class="button__next" 
                 type="button"
                 v-on:click ="playSong" 
@@ -153,8 +156,9 @@
             :points="this.points"
             >
         </shabadabada-popup>
-        <!-- EndGame -->
+        <!-- end EndGame -->
 
+        <!-- Answers display -->
         <div class="answersBlock" :style="answersBlockStyle">
             
             <h3>Vous venez d'écouter :</h3>
@@ -175,7 +179,8 @@
                 </div>
 
             </div>
-        </div>
+        </div> <!-- end Answers display -->
+        
     </div> <!--end of div game-->
 </template>
 
@@ -276,6 +281,7 @@ export default {
 
     
             // TODO change this if needed (PROD vs DEVELOPMENT)
+            // WIP manage configuration's dev and configuration's prod
             getSaveGameEndpoint : 'http://localhost/Shabadabada/public/wp-json/shabadabada/v1/save-game',
             //getSaveGameEndpoint : 'http://ec2-54-211-13-201.compute-1.amazonaws.com/apo-Shabadabada/public/wp-json/shabadabada/v1/save-game',
 
@@ -285,6 +291,8 @@ export default {
 
             sentence : '',
             bgStyleWhenPopup: '',
+
+
 
             userDirections : 
             {
@@ -441,13 +449,13 @@ export default {
                     'Ma mère vous remercie. Mon père vous remercie. Ma sœur vous remercie. Et je vous remercie.',
                     'Un grand pouvoir implique de grandes responsabilités.',
                     'Petite danse de la joie plus que méritée 👯‍♀️',
-                    'Soit assuré que ton talent est reconnu.',
-                    'On s\'incline devant ta toute pouissance 🙇‍♂️',
+                    'Sois assuré que ton talent est reconnu.',
+                    'On s\'incline devant ta toute puissance 🙇‍♂️',
                     'Tu crois que t\arriveras à renouveler l\'exploit ? ',
                 ]
             }
-    }
-},
+        }
+    },
 
     methods: {
         
@@ -465,6 +473,7 @@ export default {
             // loop on the playlist musics from the session storage
             let i = 0;
             for(let music of this.playlist.musics) {
+
                 let key = 'source' + i;
                 this[key] = music.soundExcerpt;
 
@@ -475,6 +484,7 @@ export default {
                 music.artistFound = false;
                 music.titleFound = false;
                 music.elapsedTimeForAnswer = null;
+
                 i++;
             }
         },
@@ -528,7 +538,7 @@ export default {
             // reset the timer for every new song 
             this.value = 30;
             this.readonly = false;
-            //this.focusInput();
+            
             if(this.currentAudio) {
                 // only for the debug ! this is the indexAudio which set the current song played
                 // this.currentAudio.classList.remove('current');
@@ -538,7 +548,6 @@ export default {
             // if we are on the last song (i.e index 9), we save the game
             if(this.indexAudio == this.playlist.musics.length - 1) {
   
-                //this.displayAnswer(this.indexAudio);  replace in endGame function
                 this.endGame();
             }
             else {
@@ -550,10 +559,8 @@ export default {
 
                 // otherwise we play the next song
                 this.indexAudio++;
-                //console.log(this.indexAudio);
 
                 this.currentAudio = this.audios[this.indexAudio];
-                //console.log(this.currentAudio);
 
                 this.currentAudio.classList.add('current');
                 
@@ -587,17 +594,14 @@ export default {
 
             // target currentAudio artist and title answer 
             let artistAnswer = this.playlist.musics[this.indexAudio].artist[0];
-            //console.log(artistAnswer);
 
             let musicTitleAnswer = this.playlist.musics[this.indexAudio].musicTitle;
-            //console.log(musicTitleAnswer);
 
-            // APO voir si on conserve titre et artiste car des fois c'est le nom de l'album qui sort et pas le titre d'une chanson, allez savoir pourquoi
             // toLowerCase() : method returns the calling string value converted to lower case.
             // if the artist answer entered by the user is correct OR the music title answer entered by the user is correct
             if (this.userAnswer.toLowerCase() === artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase())
             {  
-                // target the "div alert" to add the class "success" and display the matching CSS and text 
+                // target the "div alert" to add the class "right" and display the matching CSS and text 
                 // need to remove the class before to avoid class superposition 
                 let alert = document.getElementById("alert");
                 alert.classList.remove('fail');
@@ -792,6 +796,10 @@ export default {
 
 .game  {
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     box-sizing: border-box;
     padding-top: $spacing-simple;
 
@@ -832,14 +840,15 @@ export default {
             font-size: 2rem ;
         }
 
-          @keyframes glow {
-    from {
-      text-shadow: 0 0 20px #FF03A4;
+    @keyframes glow {
+
+        from {
+            text-shadow: 0 0 20px #FF03A4;
+        }
+        to {
+            text-shadow: 0 0 20px #f2029a, 0 0 10px #FF03A4;
+        }
     }
-    to {
-      text-shadow: 0 0 20px #f2029a, 0 0 10px #FF03A4;
-    }
-  }
 
     .notice {
 
@@ -852,7 +861,6 @@ export default {
         box-shadow: 6px 6px 0px $color-pink-f0f;
         margin: 1rem 0 4rem 0;
         
-
         i {
             color: $color-pink-f0f;
         }
@@ -864,7 +872,7 @@ export default {
 
         .important__bold {
 
-                font-weight: bold;
+            font-weight: bold;
         }
 
         .notice__title {
