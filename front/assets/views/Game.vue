@@ -84,7 +84,7 @@
             <div class="answer" :style="answerCurrentStyle" >
 
                 <div class="alertBlock">
-                    <p id="alert" class=""></p> <!-- attention keep the empty class, used to add a class 'fail' or 'success' in the method checkUserAnswer--> 
+                    <p id="alert" :class="{right: classAnswerRight, fail: classAnswerFail}"></p> 
                 </div>
                 
                 <!-- if we want we can use v-on:keyup="checkUserAnswer to validate the user response in "reel time". But need to choose between the 2 because together they create some bugg-->
@@ -288,6 +288,9 @@ export default {
             points: 0,
             stylePopup: 'display: none',
             closeCross: '',
+
+            classAnswerRight: false,
+            classAnswerFail: false,
 
             sentence : '',
             bgStyleWhenPopup: '',
@@ -554,15 +557,18 @@ export default {
 
                 // clean the alert before the new song begins
                 let alert = document.getElementById("alert");
-                alert.classList.remove('fail', 'right');
+                // alert.classList.remove('fail', 'right');
                 alert.textContent = '';
+
+                this.classAnswerRight = false;
+                this.classAnswerFail = false;  
 
                 // otherwise we play the next song
                 this.indexAudio++;
 
                 this.currentAudio = this.audios[this.indexAudio];
 
-                this.currentAudio.classList.add('current');
+                //this.currentAudio.classList.add('current');
                 
                 // DOC https://developer.mozilla.org/fr/docs/Web/API/HTMLMediaElement/play
                 this.currentAudio.play();
@@ -603,27 +609,46 @@ export default {
             {  
                 // target the "div alert" to add the class "right" and display the matching CSS and text 
                 // need to remove the class before to avoid class superposition 
-                let alert = document.getElementById("alert");
-                alert.classList.remove('fail');
-                alert.classList.add('right');
 
+                // this.classAnswerRight = true;
+                // this.classAnswerFail = false; 
+                // console.log(this.classAnswerRight);
+                // console.log(this.classAnswerFail);
+
+                let alert = document.getElementById("alert");
+    
                 // save the validated answer & the time at which the user found it
                 if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase() && (this.playlist.musics[this.indexAudio].titleFound === true)){
 
-                   this.playlist.musics[this.indexAudio].artistFound = true; 
-                   //console.log(this.playlist.musics[this.indexAudio].artistFound);
-                   this.displayUserDirectionsIfSuccess();
+                    this.classAnswerRight = true;
+                    this.classAnswerFail = false;
+                    console.log('si artist et titre ok');
+                    console.log(this.classAnswerRight);
+                    console.log(this.classAnswerFail);
+                    this.playlist.musics[this.indexAudio].artistFound = true; 
+                   
+                    this.displayUserDirectionsIfSuccess();
 
-                   this.readonly = true;
+                    this.readonly = true;
 
                 } 
                 else if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase()){
 
+                    this.classAnswerRight = true;
+                    this.classAnswerFail = false;
+                    console.log('si artist seul ok');
+                    console.log(this.classAnswerRight);
+                    console.log(this.classAnswerFail);
+                    
                     this.playlist.musics[this.indexAudio].artistFound = true; 
                     alert.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
                 }
                 else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase() && (this.playlist.musics[this.indexAudio].artistFound === true)) {
-
+                    this.classAnswerRight = true;
+                    this.classAnswerFail = false;
+                    console.log('si titre et artist ok');
+                    console.log(this.classAnswerRight);
+                    console.log(this.classAnswerFail);
                     this.playlist.musics[this.indexAudio].titleFound = true;
                     this.displayUserDirectionsIfSuccess();
                     
@@ -631,6 +656,11 @@ export default {
                     this.readonly = true;
                 }
                 else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()){
+                    this.classAnswerRight = true;
+                    this.classAnswerFail = false;
+                    console.log('si titre seul ok');
+                    console.log(this.classAnswerRight);
+                    console.log(this.classAnswerFail);
 
                     this.playlist.musics[this.indexAudio].titleFound = true;
                     
@@ -643,19 +673,28 @@ export default {
                 this.userAnswer = '';
 
                 // if the artist answer entered by the user is incorrect or the music title answer entered by the user is incorrect
-            } else if (this.userAnswer.toLowerCase() !== artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()) 
+            } 
+            else if (this.userAnswer.toLowerCase() !== artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()) 
             {
+                // this.classAnswerRight = false;
+                // this.classAnswerFail = true; 
+                console.log('si artist et titre faux');
+                console.log(this.classAnswerRight);
+                console.log(this.classAnswerFail);
                 this.displayUserDirectionsIfFailure();
             }  
         },
 
         displayUserDirectionsIfSuccess() {
             
+            //this.classAnswerRight = true;
+
             // target the alert div
             let alert = document.getElementById("alert");
 
             // gives a random element of the array userDirections declare in  data area as output
             // and then display the element in the above input 
+
             let personalizedDirections = _.sample(this.userDirections.ifSuccess);
             alert.textContent = personalizedDirections;
 
@@ -663,11 +702,19 @@ export default {
 
         displayUserDirectionsIfFailure() {
 
+            this.classAnswerFail = true;
+            this.classAnswerRight = false;
             // target the "div alert" to add the class "fail" and display the matching CSS and text 
             // need to remove the class before to avoid class superposition 
             let alert = document.getElementById("alert");
             //alert.classList.remove('right');
-            alert.classList.add('fail');
+            //alert.classList.add('fail');
+
+            // this.classAnswerRight = false;
+             
+            console.log('display answer if failure');
+            console.log(this.classAnswerRight);
+            console.log(this.classAnswerFail);
 
             // gives a random element of the array userDirections declare in  data area as output
             // and then display the element in the above input 
