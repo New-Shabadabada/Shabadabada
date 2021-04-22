@@ -4,7 +4,7 @@
 
         <h1 class="gameTitle" :style="titleOnGameStyle">A toi de jouer !</h1>
 
-        
+
         <!-- Rules game -->
         <h2  :style="titleNoticeStyle">
             <i class="fas fa-angle-double-right"></i>
@@ -20,29 +20,29 @@
             <i class="fas fa-angle-double-left"></i>
         </h2>
 
-        <div class="notice" :style="noticeStyle"> 
+        <div class="notice" :style="noticeStyle">
 
             <div>
                 <p class="notice__title line2">
-                    A lire, si tu veux tout déchirer 
+                    A lire, si tu veux tout déchirer
                 </p>
             </div>
 
-            <p class="notice__validate"> 
+            <p class="notice__validate">
                 <i class="far fa-hand-point-right"></i> Pour valider ta réponse tu dois <span class="important__bold"> appuyer sur la touche 'ENTRÉE'</span>, ou <span class="important__bold"> sur la touche 'RETOUR' (&#9166;) </span> de ton téléphone.
             </p>
 
-            <p class="notice__nextButton"> 
-                <i class="far fa-hand-point-right"></i> <span class="important__underline important__bold "> Le bouton 'SUIVANT' ne valide pas ta réponse,</span> il te permet simplement de <span class="important__bold"> passer à la chanson suivante </span> si tu ne souhaites pas attendre le temps restant. 
+            <p class="notice__nextButton">
+                <i class="far fa-hand-point-right"></i> <span class="important__underline important__bold "> Le bouton 'SUIVANT' ne valide pas ta réponse,</span> il te permet simplement de <span class="important__bold"> passer à la chanson suivante </span> si tu ne souhaites pas attendre le temps restant.
             </p>
-            
+
             <p class="notice__extraSpace">
                 <i class="far fa-hand-point-right"></i> Sur mobile, <span class="important__bold"> ton correcteur orthographique est un coquin </span> et il peut te rajouter un espace après le dernier mot tapé, vérifies à bien le supprimer sous peine de rager !
-            </p> 
+            </p>
 
                 <p class="notice__points">
-                <i class="far fa-hand-point-right"></i> Pour chaque extrait diffusé tu as la possibilité de <span class="important__bold"> découvrir le titre et / ou l'artiste </span>. Il faut bien <span class="important__underline important__bold "> séparer tes réponses et les rentrer une par une </span>. Si tu écris l'artiste et le titre à la suite cela ne sera pas pris en compte. Chaque <span class="important__bold">bonne réponse vaut 1 point</span>.  
-            </p> 
+                <i class="far fa-hand-point-right"></i> Pour chaque extrait diffusé tu as la possibilité de <span class="important__bold"> découvrir le titre et / ou l'artiste </span>. Il faut bien <span class="important__underline important__bold "> séparer tes réponses et les rentrer une par une </span>. Si tu écris l'artiste et le titre à la suite cela ne sera pas pris en compte. Chaque <span class="important__bold">bonne réponse vaut 1 point</span>.
+            </p>
 
         </div>
         <!-- end Rules game -->
@@ -79,47 +79,48 @@
                 </v-progress-circular>
             </div>
 
-           
 
-            <div class="answer" :style="answerCurrentStyle" >
 
+            <div class="answer"
+            :style="answerCurrentStyle"
+            >
                 <div class="alertBlock">
-                    <p id="alert" :class="{right: classAnswerRight, fail: classAnswerFail}"></p> 
+                    <p id="alert" :class="{right: classAnswerRight, fail: classAnswerFail}"></p>
                 </div>
-                
+
                 <!-- if we want we can use v-on:keyup="checkUserAnswer to validate the user response in "reel time". But need to choose between the 2 because together they create some bugg-->
                 <!-- DOC https://vuejs.org/v2/guide/syntax.html#Attributes -->
-                <input 
-                    id="answer" 
-                    name="answer" 
+                <input
+                    id="answer"
+                    name="answer"
                     style="font-family: Montserrat; font-size:14px"
-                    placeholder="Tapez le titre de la chanson ou l'artiste" 
+                    placeholder="Tapez le titre de la chanson ou l'artiste"
                     spellcheck="false"
-                    type="text" 
-                    :disabled="readonly" 
-                    v-model="userAnswer" 
-                    v-on:keyup.enter="checkUserAnswer" 
+                    type="text"
+                    :disabled="readonly"
+                    v-model="userAnswer"
+                    v-on:keyup.enter="checkUserAnswer"
                 />
-                
-            </div>  
+
+            </div>
         </div> <!-- end div question -->
 
         <div class="button" :style="buttonsGameNoneStyle">
 
-            <button 
-                class="button__start" 
+            <button
+                class="button__start"
                 type="button"
-                v-on:click ="startGame" 
-                :style="startButtonStyle" 
+                v-on:click ="startGame"
+                :style="startButtonStyle"
             >
                 Start
             <button>
 
 
-            <button 
-                class="button__next" 
+            <button
+                class="button__next"
                 type="button"
-                v-on:click ="playSong" 
+                v-on:click ="playSong"
                 :style="nextButtonStyle"
             >
                 Suivant
@@ -127,19 +128,19 @@
 
         </div>
 
-        
+
         <!-- EndGame -->
         <div class="background-popup" :style="bgStyleWhenPopup"></div>
 
-        
-        <h1 class="gameTitle" :style="titleEndGameStyle">Partie terminée ! Envie de remettre ça ?</h1>  
+
+        <h1 class="gameTitle" :style="titleEndGameStyle">Partie terminée ! Envie de remettre ça ?</h1>
 
         <div class="button" :style="playagainButtonStyle">
 
-            <button 
-                    class="button__replay" 
+            <button
+                    class="button__replay"
                     type="button"
-                    
+
                 >
                     <router-link :to="{name: 'categoriesList'}" >
                     Rejouer
@@ -148,10 +149,10 @@
         </div>
 
         <!--STEP $emit step 3: we also add a custom event listener onto our component that listens out for 'displayNonePopup'. Our custom listener is waiting for the 'displayNonePopup'event to be fired. It will happen when the string 'displayNonePopup' is emitted from inside the 'popup.vue'-->
-        <shabadabada-popup 
-            class="popup" 
-            @displayNonePopup="displayNonePopup" 
-            :style="stylePopup" 
+        <shabadabada-popup
+            class="popup"
+            @displayNonePopup="displayNonePopup"
+            :style="stylePopup"
             :sentence="this.sentence"
             :points="this.points"
             >
@@ -160,7 +161,7 @@
 
         <!-- Answers display -->
         <div class="answersBlock" :style="answersBlockStyle">
-            
+
             <h3>Vous venez d'écouter :</h3>
 
             <div class="answersDisplay">
@@ -180,14 +181,14 @@
 
             </div>
         </div> <!-- end Answers display -->
-        
+
     </div> <!--end of div game-->
 </template>
 
 
 <script>
 
-//=============== IMPORT ================ 
+//=============== IMPORT ================
 
 import axios from 'axios';
 import Popup from '../components/Popup';
@@ -201,7 +202,7 @@ export default {
 
     created() {
 
-        this.load();   
+        this.load();
     },
 
     components: {
@@ -213,7 +214,8 @@ export default {
 
         progress : String,
         rating : String,
-        
+        //alert: String,
+
     },
 
     data() {
@@ -228,14 +230,15 @@ export default {
             shadowStyleChange : 'text-shadow: 2px 1.5px #FF03A4',
 
             readonly : Boolean,
-            
+
             userAnswer: '',
+            //alertDirection:'',
 
             // list of all the songs into the playlist
-            audios: null, 
+            audios: null,
 
             // define an "id" for the current song (it match the index of every song in the playlist)
-            // default value set to -1, because it's implemented in the playsong function which start the song 
+            // default value set to -1, because it's implemented in the playsong function which start the song
             indexAudio: -1,
 
             // current song
@@ -279,7 +282,7 @@ export default {
             source8: '',
             source9: '',
 
-    
+
             // TODO change this if needed (PROD vs DEVELOPMENT)
             // WIP manage configuration's dev and configuration's prod
             getSaveGameEndpoint : 'http://localhost/Shabadabada/public/wp-json/shabadabada/v1/save-game',
@@ -289,6 +292,7 @@ export default {
             stylePopup: 'display: none',
             closeCross: '',
 
+            // DOC https://fr.vuejs.org/v2/guide/class-and-style.html
             classAnswerRight: false,
             classAnswerFail: false,
 
@@ -297,7 +301,7 @@ export default {
 
 
 
-            userDirections : 
+            userDirections :
             {
                 ifSuccess: [
                     'Travail exemplaire, rien à dire.',
@@ -375,7 +379,7 @@ export default {
 
             },
 
-            scoreSentence : 
+            scoreSentence :
             {
 
                 zeroToNine: [
@@ -438,8 +442,8 @@ export default {
                     'Vous étiez à ça de réussir, c\'est dommage !',
                     'Pas mal, mais on a vu mieux ! 😘',
                     'Dab virtuel en ton honneur.',
-                ], 
-                
+                ],
+
                 nineteenToTwelve: [
 
                     'Heureusement, il y a parfois des joueurs qui compensent pour tous les autres: vous êtes excellent ! Merci, on est trop content 😊',
@@ -461,11 +465,11 @@ export default {
     },
 
     methods: {
-        
+
         load(){
 
             this.bgStyleWhenPopup = "display:none";
-           
+
             //console.log('%c' + 'load playlist', 'color: #0bf; font-size: 1rem; background-color:#f0f');
             // TODO SESSION_STORAGE be careful session storage !
             this.playlist = JSON.parse(sessionStorage.getItem('game'));
@@ -491,7 +495,7 @@ export default {
                 i++;
             }
         },
-        
+
         startGame() {
             // target & save as a data all the audio players (we'll need this to control the app)
             // reminder: target a parent element with several children, generate a indexed chart with the children data
@@ -500,8 +504,8 @@ export default {
 
             this.interval = setInterval(() => {
 
-                if (this.value <= 6 && this.value > 0) { 
-                        
+                if (this.value <= 6 && this.value > 0) {
+
                     this.color = '#FF03A4';
                     this.shadowStyleChange = 'text-shadow: 2px 1.5px #FFD13B';
                 }
@@ -538,10 +542,10 @@ export default {
 
         playSong() {
 
-            // reset the timer for every new song 
+            // reset the timer for every new song
             this.value = 30;
             this.readonly = false;
-            
+
             if(this.currentAudio) {
                 // only for the debug ! this is the indexAudio which set the current song played
                 // this.currentAudio.classList.remove('current');
@@ -550,7 +554,7 @@ export default {
 
             // if we are on the last song (i.e index 9), we save the game
             if(this.indexAudio == this.playlist.musics.length - 1) {
-  
+
                 this.endGame();
             }
             else {
@@ -561,7 +565,7 @@ export default {
                 alert.textContent = '';
 
                 this.classAnswerRight = false;
-                this.classAnswerFail = false;  
+                this.classAnswerFail = false;
 
                 // otherwise we play the next song
                 this.indexAudio++;
@@ -569,18 +573,18 @@ export default {
                 this.currentAudio = this.audios[this.indexAudio];
 
                 //this.currentAudio.classList.add('current');
-                
+
                 // DOC https://developer.mozilla.org/fr/docs/Web/API/HTMLMediaElement/play
                 this.currentAudio.play();
-                
+
                 // if 'currentAudio' is not the first song, we call the function 'displayAnswer' and add points if the previous response is correct
                 if(this.indexAudio > 0){
 
                     // call function for display informations of each song
-                    this.displayAnswer();  
-                 
+                    this.displayAnswer();
+
                     // call function calculatePoints for each song
-                    this.calculatePoints(); 
+                    this.calculatePoints();
                 }
             }
 
@@ -598,102 +602,68 @@ export default {
             this.playlist.musics[this.indexAudio].triesCount++;
             this.playlist.musics[this.indexAudio].tries.push(this.userAnswer);
 
-            // target currentAudio artist and title answer 
+            // target currentAudio artist and title answer
             let artistAnswer = this.playlist.musics[this.indexAudio].artist[0];
 
             let musicTitleAnswer = this.playlist.musics[this.indexAudio].musicTitle;
+            let alert = document.getElementById("alert");
 
-            // toLowerCase() : method returns the calling string value converted to lower case.
-            // if the artist answer entered by the user is correct OR the music title answer entered by the user is correct
-            if (this.userAnswer.toLowerCase() === artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase())
-            {  
-                // target the "div alert" to add the class "right" and display the matching CSS and text 
-                // need to remove the class before to avoid class superposition 
+            if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase()){
 
-                // this.classAnswerRight = true;
-                // this.classAnswerFail = false; 
-                // console.log(this.classAnswerRight);
-                // console.log(this.classAnswerFail);
+                this.classAnswerRight = true;
+                this.classAnswerFail = false;
+                this.playlist.musics[this.indexAudio].artistFound = true;
 
-                let alert = document.getElementById("alert");
-    
-                // save the validated answer & the time at which the user found it
-                if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase() && (this.playlist.musics[this.indexAudio].titleFound === true)){
+                if(this.playlist.musics[this.indexAudio].artistFound === true && (this.playlist.musics[this.indexAudio].titleFound === true)){
 
-                    this.classAnswerRight = true;
-                    this.classAnswerFail = false;
-                    console.log('si artist et titre ok');
-                    console.log(this.classAnswerRight);
-                    console.log(this.classAnswerFail);
-                    this.playlist.musics[this.indexAudio].artistFound = true; 
-                   
                     this.displayUserDirectionsIfSuccess();
 
                     this.readonly = true;
+                }
+                else {
 
-                } 
-                else if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase()){
-
-                    this.classAnswerRight = true;
-                    this.classAnswerFail = false;
-                    console.log('si artist seul ok');
-                    console.log(this.classAnswerRight);
-                    console.log(this.classAnswerFail);
-                    
-                    this.playlist.musics[this.indexAudio].artistFound = true; 
                     alert.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
                 }
-                else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase() && (this.playlist.musics[this.indexAudio].artistFound === true)) {
-                    this.classAnswerRight = true;
-                    this.classAnswerFail = false;
-                    console.log('si titre et artist ok');
-                    console.log(this.classAnswerRight);
-                    console.log(this.classAnswerFail);
-                    this.playlist.musics[this.indexAudio].titleFound = true;
+                this.userAnswer = '';
+            }
+            else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()){
+
+                this.classAnswerRight = true;
+                this.classAnswerFail = false;
+                this.playlist.musics[this.indexAudio].titleFound = true;
+
+                if(this.playlist.musics[this.indexAudio].titleFound === true && (this.playlist.musics[this.indexAudio].artistFound === true)) {
+
                     this.displayUserDirectionsIfSuccess();
-                    
-                    
+
                     this.readonly = true;
                 }
-                else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()){
-                    this.classAnswerRight = true;
-                    this.classAnswerFail = false;
-                    console.log('si titre seul ok');
-                    console.log(this.classAnswerRight);
-                    console.log(this.classAnswerFail);
+                else {
 
-                    this.playlist.musics[this.indexAudio].titleFound = true;
-                    
                     alert.textContent = 'Bravo tu as trouvé le titre, connais-tu l\'artiste ?';
                 }
-
-                this.playlist.musics[this.indexAudio].elapsedTimeForAnswer = 30 - this.value;
-
-                // if the answer is correct we clean the input
                 this.userAnswer = '';
 
-                // if the artist answer entered by the user is incorrect or the music title answer entered by the user is incorrect
-            } 
-            else if (this.userAnswer.toLowerCase() !== artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()) 
-            {
-                // this.classAnswerRight = false;
-                // this.classAnswerFail = true; 
-                console.log('si artist et titre faux');
-                console.log(this.classAnswerRight);
-                console.log(this.classAnswerFail);
+            }
+            else if (this.userAnswer.toLowerCase() !== artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() !== musicTitleAnswer.toLowerCase()){
+                this.classAnswerFail = true;
+                this.classAnswerRight = false;
                 this.displayUserDirectionsIfFailure();
-            }  
+            }
+
+            this.playlist.musics[this.indexAudio].elapsedTimeForAnswer = 30 - this.value;
+
         },
 
         displayUserDirectionsIfSuccess() {
-            
+
             //this.classAnswerRight = true;
 
             // target the alert div
             let alert = document.getElementById("alert");
 
             // gives a random element of the array userDirections declare in  data area as output
-            // and then display the element in the above input 
+            // and then display the element in the above input
 
             let personalizedDirections = _.sample(this.userDirections.ifSuccess);
             alert.textContent = personalizedDirections;
@@ -702,45 +672,34 @@ export default {
 
         displayUserDirectionsIfFailure() {
 
-            this.classAnswerFail = true;
-            this.classAnswerRight = false;
-            // target the "div alert" to add the class "fail" and display the matching CSS and text 
-            // need to remove the class before to avoid class superposition 
+            // target the "div alert" to add the class "fail" and display the matching CSS and text
             let alert = document.getElementById("alert");
-            //alert.classList.remove('right');
-            //alert.classList.add('fail');
-
-            // this.classAnswerRight = false;
-             
-            console.log('display answer if failure');
-            console.log(this.classAnswerRight);
-            console.log(this.classAnswerFail);
 
             // gives a random element of the array userDirections declare in  data area as output
-            // and then display the element in the above input 
+            // and then display the element in the above input
             let personalizedDirections = _.sample(this.userDirections.ifFailure);
-            alert.textContent = personalizedDirections;
 
+            alert.textContent = personalizedDirections;
         },
 
 
         // method to display tracks's informations that the user has already listened to
-        // majout de indexAudio en paramètre pour pouvoir gérer l'affichage de la dernière chanson sans répéter le code 
+        // majout de indexAudio en paramètre pour pouvoir gérer l'affichage de la dernière chanson sans répéter le code
         displayAnswer(indexAudio = this.indexAudio -1){
-                
+
             // retrieve artist, musicTitle and albumThumbnail listened
             this.artist = this.playlist.musics[indexAudio].artist[0];
-            
+
             this.musicTitle = this.playlist.musics[indexAudio].musicTitle;
 
             this.albumThumbnail = this.playlist.musics[indexAudio].albumThumbnail;
 
             // DOC https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
-            this.answers.unshift([this.idMusic, this.artist, this.musicTitle, this.albumThumbnail]); 
+            this.answers.unshift([this.idMusic, this.artist, this.musicTitle, this.albumThumbnail]);
 
         },
 
-        // method for calculate points according to user's response it's true are false, useful for display points in the popup 
+        // method for calculate points according to user's response it's true are false, useful for display points in the popup
         calculatePoints(){
 
             // calculation of points according to the answers found (1 points for the artist, 1 points for the title)
