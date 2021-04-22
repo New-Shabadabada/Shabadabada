@@ -8,14 +8,14 @@
 
             <div class="cards" v-for="category in categories" :key="category.id">
 
-                <card-category :category="category"><card-category>   
+                <card-category :category="category"><card-category>
 
             </div>
 
         </div>
 
      </section>
-     
+
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
             categories: []
         }
     },
-    
+
     created: function() {
 
         axios.get(this.getCategoriesEndPoint).then(response => {
@@ -66,12 +66,12 @@ section{
     display : flex;
     // voir pour un flex direction column plutôt que flex-wrap
     //flex-direction: column;
-    flex-wrap: wrap;  
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     min-width: 100%;
     margin-top: $spacing-medium;
-    
+
 
     h1{
         font-family: "Lazer84";
@@ -95,7 +95,7 @@ section{
     align-items: center;
     flex-wrap: wrap;
     max-width: 80%;
-    
+
     .cards{
 
         width: 100%;
@@ -139,7 +139,7 @@ section{
         align-content: center;
         padding: 0.7rem 0.9rem 0.7rem 0.9rem;
     }
-} 
+}
 
 @include screen-medium{
 
@@ -168,6 +168,6 @@ section{
         .cards{
             padding: 3rem;
         }
-    }    
+    }
 }
 </style>

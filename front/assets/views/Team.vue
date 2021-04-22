@@ -3,15 +3,15 @@
     <h1 class="titlePage">Notre Dream Team</h1>
     <v-layout row wrap justify-center class="mb-2 layoutG">
       <v-flex xs8 lg6>
-         <v-carousel 
+         <v-carousel
          class="carousel"
          show-arrows-on-hover
-         
+
          hide-delimiters
          >
           <v-carousel-item
             v-for="(item,i) in items"
-            :key="i"  
+            :key="i"
             :src="item.src"
           >
               <v-container
@@ -77,16 +77,16 @@ export default {
           {
             src: require('../images/solene.jpg')
           },
-        
+
         ],
-     
+
 
         slides: [
           'Amandine Floucaut',
           'JD Stibling',
           'Solène Pilliard',
         ],
-      
+
         motto: [
           'Elle attend que le monde change',
           'Il jouait du piano debout',
@@ -114,7 +114,7 @@ export default {
   min-height: 100vh;
   height : 100%;
 
-  
+
   .carousel{
 
     box-shadow: 1px 1px 8px rgba(172, 168, 168,1);
@@ -148,7 +148,7 @@ export default {
       padding-top : 0.5rem;
     }
   }
-  
+
   .titlePage{
 
     font-family: "Lazer84";
@@ -162,7 +162,7 @@ export default {
     margin : 2rem 0rem 1rem 0rem;
     min-width: 100%;
     width: 100%;
-      
+
   }
 
   div.container{
@@ -171,14 +171,14 @@ export default {
 
 }
 
-// ========= Media queries =========// 
-  
+// ========= Media queries =========//
+
 @include screen-small{
 
   .container{
-    
+
     .motto{
-        height: 3.2rem; 
+        height: 3.2rem;
         max-height : 8rem;
         font-size: 0.7rem;
         padding-top : 0rem;
@@ -201,7 +201,7 @@ h1 {
   font-size: 2rem;
   text-align: center;
 }
-    
+
 @include screen-medium{
 
   .container{

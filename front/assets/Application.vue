@@ -2,13 +2,13 @@
     <!-- IMPORTANT  to use vuetify, the application must be encapsuled in a v-app balise //-->
     <v-app>
         <main>
-    
+
             <shabadabada-header></shabadabada-header>
-            
+
             <section class="background">
-                <router-view></router-view>  
+                <router-view></router-view>
             </section>
-            
+
             <shabadabada-footer></shabadabada-footer>
 
         </main>

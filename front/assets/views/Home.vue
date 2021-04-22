@@ -15,12 +15,12 @@
                <transition name="bounce3">
                     <p class="word3">fun ?</p>
                </transition>
-                
+
             </div> <!--end of home__catchline-->
 
             <div class="button">
-                <button v-on:click ="rules" class="button__click-here" type="button">Clique ici<button>   
-            </div>    
+                <button v-on:click ="rules" class="button__click-here" type="button">Clique ici<button>
+            </div>
 
         </div> <!--end of home__part1-->
 
@@ -31,35 +31,35 @@
                 <h2> Simply the best blind-test musical pour voir la vie en rose </h2>
             </div>
 
-               
+
             <h3> Comment ça marche ? </h3>
 
             <div class="home__explanation">
-            
+
                 <div class="rules rule1">
                     <div class="number one"> 1 </div>
-                        <p class="rule"> 
-                            Choisis la catégorie de ton blind-test. 
+                        <p class="rule">
+                            Choisis la catégorie de ton blind-test.
                         </p>
                 </div>
-            
+
                 <div class="rules rule2">
                     <div class="number two"> 2 </div>
-                        <p class="rule"> 
-                            Trouve l'artiste et/ou le titre des 10 extraits diffusés. 
+                        <p class="rule">
+                            Trouve l'artiste et/ou le titre des 10 extraits diffusés.
                         </p>
                 </div>
-            
+
                 <div class="rules rule3">
                     <div class="number three"> 3 </div>
                         <p class="rule">
                             Ecris ta réponse dans les 30 secondes imparties et appuie sur entrée pour valider.
                         </p>
                 </div>
-      
+
             </div> <!--end of home__explanation-->
 
-            <div class="button">  
+            <div class="button">
                 <router-link :to="{name: 'categoriesList'}">
                     <button class="button__play" type="button"> Jouer <button>
                 </router-link>
@@ -82,7 +82,7 @@ export default {
             styleRules: 'display: none',
         }
     },
-   
+
     methods: {
 
         rules(){
@@ -91,7 +91,7 @@ export default {
         }
     },
 
-    
+
 }
 </script>
 
@@ -128,7 +128,7 @@ export default {
     .button__click-here {
 
         background-color: $color-yellow;
-        border: none; 
+        border: none;
         color: white;
         text-align: center;
         text-decoration: none;
@@ -149,7 +149,7 @@ export default {
 .home__part2 {
 
     .home__introduction {
-        
+
         text-align: center;
 
         h1 {
@@ -183,7 +183,7 @@ export default {
         word-spacing: 0.5rem;
         text-shadow: 2px 1.5px $color-pink-f0f;
         margin-top: 4rem;
-    }   
+    }
 
     .home__explanation {
 
@@ -211,7 +211,7 @@ export default {
 
             .number {
 
-                width: 10%;            
+                width: 10%;
                 text-align: center;
                 background-color: $color-yellow;
                 border-radius: 50%;
@@ -230,7 +230,7 @@ export default {
 
                 margin-left: 1rem;
                 width: 80%;
-                font-size: 20px;   
+                font-size: 20px;
             }
         }
     }
@@ -243,7 +243,7 @@ export default {
     .button__play {
 
         background-color: $color-yellow;
-        border: none; 
+        border: none;
         color: white;
         text-align: center;
         text-decoration: none;
@@ -264,7 +264,7 @@ export default {
     margin-bottom: 0px;
 }
 
-// ========= Media queries =========// 
+// ========= Media queries =========//
 
 @include screen-small {
 
@@ -293,7 +293,7 @@ export default {
 
             align-self: center;
             margin-left: $spacing-double;
-        }   
+        }
 
         .word3 {
 
@@ -306,8 +306,8 @@ export default {
 
         .home__introduction h1 {
 
-            font-size: 4rem;  
-            padding-top: 1rem; 
+            font-size: 4rem;
+            padding-top: 1rem;
         }
 
         .home__introduction h2 {
@@ -347,8 +347,8 @@ export default {
         }
     }
 } // end of screen-medium
-   
-   
+
+
 @include screen-large{
 
     .home__catchline {
@@ -359,9 +359,9 @@ export default {
         .word2,
         .word3 {
 
-           font-size: 8rem; 
+           font-size: 8rem;
         }
-        
+
     }
 
     .home__part2 {
@@ -395,10 +395,10 @@ export default {
             .word2,
             .word3 {
 
-                font-size: 10rem; 
+                font-size: 10rem;
             }
         }
-        
+
         .button .button__click-here {
 
             padding: 10px 20px;
@@ -422,7 +422,7 @@ export default {
                 .rule {
                     font-size: 1.5rem;
                 }
-                
+
 
             }
         }

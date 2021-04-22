@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        
+
        <div class="grid"></div>
       <div class="lines"></div>
         <h1>
@@ -16,7 +16,7 @@
                     <p> Retour vers Shabadabada</p>
                 </router-link>
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -40,7 +40,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo:wght@900&display=swap');
 .wrapper {
-  
+
   width: 100%;
   height: 100vh;
   margin: 0;
@@ -71,7 +71,7 @@ h1 {
   margin: 0;
   transform: skew(-15deg);
   letter-spacing: 0.03em;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -79,19 +79,19 @@ h1 {
     right: 0.05em;
     width: 0.4em;
     height: 0.4em;
-    background: 
+    background:
       radial-gradient(white 3%, rgba(white, 0.3) 15%, rgba(white, 0.05) 60%, transparent 80%),
       radial-gradient(rgba(white, 0.2) 50%, transparent 60%) 50% 50% / 5% 100%,
       radial-gradient(rgba(white, 0.2) 50%, transparent 60%) 50% 50% / 70% 5%;
     background-repeat: no-repeat;
   }
-  
+
   span:first-child {
     display: block;
     text-shadow: 0 0 0.1em #8ba2d0, 0 0 0.2em black,  0 0 5em $color-turquoise;
     -webkit-text-stroke: 0.06em rgba(black, 0.5);
   }
-  
+
   span:last-child {
     position: absolute;
     left: 0;
@@ -114,7 +114,7 @@ h2 {
 .grid {
   $main: $color-pink-f0f;
   $glow: rgba($color-pink, 0.4);
-  background: 
+  background:
     linear-gradient(transparent 65%, $color-pink-f0f 75%, $main 80%, $color-pink-f0f 85%, transparent 95%),
     linear-gradient(90deg, transparent 65%, $color-turquoise 75%, $main 80%, $color-turquoise 85%, transparent 95%);
   background-size: 30px 30px;
@@ -126,14 +126,14 @@ h2 {
   -webkit-mask-image: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0) 80%);
 }
 .logo {
-  
+
   position: relative;
   bottom: -0.6rem;
             display: flex;
             //background-color: black;
 }
-.logoText {  
-    
+.logoText {
+
     display: block;
 }
 p {
