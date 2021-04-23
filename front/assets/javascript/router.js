@@ -37,28 +37,28 @@ const router = new VueRouter({
 
   routes: [
     {
-      name: 'home', 
-      path: '/',       
-      component: Home 
+      name: 'home',
+      path: '/',
+      component: Home
     },
     {
-      name: 'categoriesList', 
-      path: '/categories', 
+      name: 'categoriesList',
+      path: '/categories',
       component: CategoriesList
     },
     {
-      name: 'game', 
-      path: '/game', 
+      name: 'game',
+      path: '/game',
       component: Game
     },
     {
-      name: 'error404', 
-      path: '/error404', 
+      name: 'error404',
+      path: '/error404',
       component: Error404
     },
     {
-      name: 'team', 
-      path: '/team', 
+      name: 'team',
+      path: '/team',
       component: Team
     },
   ]

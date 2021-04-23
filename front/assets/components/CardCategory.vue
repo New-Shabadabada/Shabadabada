@@ -1,14 +1,14 @@
 <template>
     <div class="cardCategory" @click="startGame">
         <a>
-            <div 
-                class="icon" 
-                @mouseover="mouseOver" 
+            <div
+                class="icon"
+                @mouseover="mouseOver"
                 @mouseleave="mouseLeave"
             >
                 <v-hover><img :src="icon" :style="imgPlay"></v-hover>
                 <img :src="category.description" :style="imgCategory">
-            
+
             </div>
 
             <div class="name">
@@ -16,9 +16,9 @@
                 <span>{{category.name}}</span>
 
             </div>
-        </a>     
+        </a>
     </div>
-    
+
 </template>
 
 <script>
@@ -38,13 +38,12 @@ export default {
 
             getGameStartEndPoint: 'http://localhost/Shabadabada/public/wp-json/shabadabada/v1/create-game',
             //getGameStartEndPoint: 'http://' + document.location.host + '/apo-Shabadabada/public/wp-json/shabadabada/v1/create-game',
-            // getGameStartEndPoint: './apo-Shabadabada/public/wp-json/shabadabada/v1/create-game',
 
             imgPlay : 'display: none',
             imgCategory : '',
             icon : require('../images/play5.png')
 
-           
+
         }
     },
 
@@ -54,7 +53,7 @@ export default {
             type: Object,
         },
 
-        
+
     },
 
     methods: {
@@ -71,7 +70,7 @@ export default {
                 //document.location = 'http://' + document.location.host + '/apo-Shabadabada/public/front/game';
             });
         },
-        
+
         mouseOver: function(){
 
             this.imgPlay = 'display : block';
@@ -92,7 +91,7 @@ export default {
 @import '../scss/main.scss';
 
 a{
-    display: flex; 
+    display: flex;
     text-decoration: none;
     align-items:center;
     justify-content :center;
@@ -128,7 +127,7 @@ a{
             transition: 0.5s;
             transform: scale(1.1);
         }
-        
+
 
         img{
             width: 4rem;
@@ -154,5 +153,5 @@ a{
         }
     }
 }
-    
+
 </style>

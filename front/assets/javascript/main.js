@@ -9,11 +9,11 @@ import "../scss/main";
 import 'regenerator-runtime/runtime';
 
 
-// ==============  vuejs import ============== 
+// ==============  vuejs import ==============
 import Vue from 'vue';
 import Application from "../Application";
 
-// ==============  vuetify import ============== 
+// ==============  vuetify import ==============
 // Vuetify import (framemework vuetify)
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.css';
@@ -26,16 +26,16 @@ const opts = {};
 const vuetifyInstance = new Vuetify(opts);
 
 
-// ============== routerjs application ============== 
+// ============== routerjs application ==============
 import router from './router';
 
 
-// ============== vuejs application ============== 
+// ============== vuejs application ==============
 
 let shabadabada = new Vue({
     // DOM element (selector) to display the application
-    el: '#app', 
-    
+    el: '#app',
+
     // inject Vuetify  ...
     vuetify: vuetifyInstance,
 
