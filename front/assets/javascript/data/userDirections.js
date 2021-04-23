@@ -78,9 +78,4 @@ let userDirections =
         ]
     };
 
-console.log(userDirections);
-console.log(userDirections.ifSuccess[0]);
-
-
-
 export default userDirections;
