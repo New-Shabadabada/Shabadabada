@@ -82,7 +82,7 @@
 
 
             <div class="answer"
-            :style="answerCurrentStyle"
+            :style="answerDisplayStyle"
             >
                 <div class="alertBlock">
                     <p id="alert" :class="{right: classAlertRight, fail: classAlertFail}"></p>
@@ -227,55 +227,18 @@ export default {
 
         return {
 
-            // duration timer dynamization
-            anwserAllowedTime: 0,
-            interval: {},
-            value: 30,
-            color: '#FFD13B',
-            shadowStyleChange: 'text-shadow: 2px 1.5px #FF03A4',
-
-            readonly: Boolean,
-            userAnswer: '',
-
-            artistFound: false,
-            titleFound: false,
-
-            // list of all the songs into the playlist
-            audios: null,
-
-            // define an "id" for the current song (it match the index of every song in the playlist)
-            // default value set to -1, because it's implemented in the playsong function which start the song
-            indexAudio: -1,
-
-            // current song
-            currentAudio: null,
-
+            //==== Title page ====//
             titleOnGameStyle: '',
             titleEndGameStyle: 'display:none',
 
-            // to modify the input answer style
-            answerCurrentStyle: 'display:none',
-
-            startButtonStyle: '',
-
-            nextButtonStyle: 'display:none',
-
-            progressCircularStyle: 'display:none',
-
-            playagainButtonStyle: 'display:none',
-
+            //==== Notice ====//
             titleNoticeStyle: '',
             noticeStyle: '',
 
-            buttonsGameNoneStyle: '',
-
-            answersBlockStyle: 'background-color: white; display:none',
-            artist: '',
-            musicTitle: '',
-            albumThumbnail: '',
-            idMusic: 0,
-            answers: [],
-
+            //==== Audios playlist ====//
+            audios: null,
+            indexAudio: -1,// default value set to -1, because we incremented the index in the playsong function as soon as the game start
+            currentAudio: null,
             playlist: null,
             source0: '',
             source1: '',
@@ -288,30 +251,66 @@ export default {
             source8: '',
             source9: '',
 
+            //==== Progress circular ====//
+            anwserAllowedTime: 0,
+            interval: {},
+            value: 30,
+            color: '#FFD13B',
+            shadowStyleChange: 'text-shadow: 2px 1.5px #FF03A4',
+            progressCircularStyle: 'display:none',
 
+            //==== Block Answer ====//
+            answerDisplayStyle: 'display:none',
+
+            //= Alert =//
+            // DOC https://fr.vuejs.org/v2/guide/class-and-style.html
+            classAlertRight: false,
+            classAlertFail: false,
+            // import the data above from an 'external' file located in the folder '../javascript/data/userDirections.js'
+            // transform the array imported into  vue.js data to use it in our methods
+            userDirections: userDirections,
+
+            //= Input =//
+            readonly: Boolean,
+            userAnswer: '',
+
+            //= User answers terms =//
+            artistFound: false,
+            titleFound: false,
+
+            //==== Button's game ====//
+            buttonsGameNoneStyle: '',
+            startButtonStyle: '',
+            nextButtonStyle: 'display:none',
+
+            //==== Display infos music ====//
+            answersBlockStyle: 'background-color: white; display:none',
+            artist: '',
+            musicTitle: '',
+            albumThumbnail: '',
+            idMusic: 0,
+            answers: [],
+
+            //==== End game ====//
+
+            //= Save game =//
             // TODO change this if needed (PROD vs DEVELOPMENT)
             // WIP manage configuration's dev and configuration's prod
             getSaveGameEndpoint : 'http://localhost/Shabadabada/public/wp-json/shabadabada/v1/save-game',
             //getSaveGameEndpoint : 'http://ec2-54-211-13-201.compute-1.amazonaws.com/apo-Shabadabada/public/wp-json/shabadabada/v1/save-game',
 
+            //= Points =//
             points: 0,
+
+            //= Popup end game =//
+            bgStyleWhenPopup: '',
             stylePopup: 'display: none',
             closeCross: '',
-
-            // DOC https://fr.vuejs.org/v2/guide/class-and-style.html
-            classAlertRight: false,
-            classAlertFail: false,
-
             sentence : '',
-            bgStyleWhenPopup: '',
-
-            // import the data above from an 'external' file located in the folder '../javascript/data/userDirections.js'
-            // transform the array imported into  vue.js data to use it in our methods
-            userDirections: userDirections,
-
             // import the data above from an 'external' file located in the folder '../javascript/data/scoreSentence.js'
             // transform the array imported into vue.js data to use it in our methods
             scoreSentence: scoreSentence,
+            playagainButtonStyle: 'display:none',
         }
     },
 
@@ -377,7 +376,7 @@ export default {
 
             this.playSong();
             this.readonly = false;
-            this.answerCurrentStyle= 'display:block';
+            this.answerDisplayStyle= 'display:block';
             this.startButtonStyle = "display:none";
             this.nextButtonStyle = "display:block";
             this.titleNoticeStyle = "display:none";
@@ -611,7 +610,7 @@ export default {
             this.nextButtonStyle = 'display: none';
             this.progressCircularStyle = 'display: none';
             this.bgStyleWhenPopup = "display: block";
-            this.answerCurrentStyle= 'display:none';
+            this.answerDisplayStyle= 'display:none';
             this.titleEndGameStyle= 'display:block';
             this.titleOnGameStyle='display:none';
             this. buttonsGameNoneStyle='display:none';
