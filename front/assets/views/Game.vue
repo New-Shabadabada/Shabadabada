@@ -462,14 +462,14 @@ export default {
             let alert = document.getElementById("alert");
 
             if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase()){
-                console.log('artist found');
+
                 this.playlist.musics[this.indexAudio].artistFound = true;
                 this.artistFound = true;
 
                 this.changeClassesAlert(this.artistFound);
 
                 if(this.artistFound && this.titleFound){
-                    console.log('artist found et titre deja ok');
+
                     this.displayUserDirectionsIfSuccess();
 
                     this.readonly = true;
@@ -477,15 +477,10 @@ export default {
                 else {
 
                     alert.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
-
-                    // this.alertDirection.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
-
                 }
                 this.userAnswer = '';
             }
             else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()){
-
-                console.log('title found');
 
                 this.playlist.musics[this.indexAudio].titleFound = true;
                 this.titleFound = true;
@@ -493,7 +488,7 @@ export default {
                 this.changeClassesAlert(this.titleFound);
 
                 if(this.titleFound && this.artistFound) {
-                    console.log('title found et artist deja ok');
+
                     this.displayUserDirectionsIfSuccess();
 
                     this.readonly = true;
@@ -501,7 +496,6 @@ export default {
                 else {
 
                     alert.textContent = 'Bravo tu as trouvé le titre, connais-tu l\'artiste ?';
-                    //this.alertDirection = 'Bravo tu as trouvé le titre, connais-tu l\'artiste ?';
                 }
 
                 this.userAnswer = '';
@@ -541,8 +535,6 @@ export default {
             // and then display the element in the above input
             let personalizedDirections = _.sample(this.userDirections.ifSuccess);
             alert.textContent = personalizedDirections;
-            //this.alertDirection = personalizedDirections;
-
         },
 
         displayUserDirectionsIfFailure() {
@@ -555,8 +547,6 @@ export default {
             let personalizedDirections = _.sample(this.userDirections.ifFailure);
 
             alert.textContent = personalizedDirections;
-            //this.alertDirection = personalizedDirections;
-
         },
 
 
@@ -623,33 +613,28 @@ export default {
 
         displayScoreSentence(){
 
-        //console.log(this.points);
-
             if(this.points >= 0 && this.points <= 9){
 
                 // DOCS _.sample https://underscorejs.org/#sample
                 // gives a random element of the array as output
                 let personalizedSentenceScore = _.sample(this.scoreSentence.zeroToNine);
                 this.sentence = personalizedSentenceScore;
-
-            } else if (this.points >= 10 && this.points <= 16) {
+            }
+            else if (this.points >= 10 && this.points <= 16) {
 
                 let personalizedSentenceScore = _.sample(this.scoreSentence.tenToSixteen);
                 this.sentence = personalizedSentenceScore;
-
-
-            } else if (this.points >= 17 && this.points <= 18){
+            }
+            else if (this.points >= 17 && this.points <= 18){
 
                 let personalizedSentenceScore = _.sample(this.scoreSentence.seventeenToEighteen);
                 this.sentence = personalizedSentenceScore;
-
-
-            } else if (this.points >= 19 && this.points <= 20){
+            }
+            else if (this.points >= 19 && this.points <= 20){
 
                 let personalizedSentenceScore = _.sample(this.scoreSentence.nineteenToTwelve);
                 this.sentence = personalizedSentenceScore;
             }
-
         },
 
         // STEP $emit step 4: when @displayNonePopup event listener is triggered this function happens. It simply put the style display: none on the div popup which allow us to close it in a certain way-->

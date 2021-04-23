@@ -84,7 +84,5 @@ let scoreSentence =
         ]
     }
 
-    console.log(scoreSentence);
-    console.log(scoreSentence.nineteenToTwelve);
 
 export default scoreSentence;
