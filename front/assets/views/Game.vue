@@ -85,7 +85,7 @@
             :style="answerCurrentStyle"
             >
                 <div class="alertBlock">
-                    <p id="alert" :class="{right: classAnswerRight, fail: classAnswerFail}"></p>
+                    <p id="alert" :class="{right: classAlertRight, fail: classAlertFail}"></p>
                 </div>
 
                 <!-- if we want we can use v-on:keyup="checkUserAnswer to validate the user response in "reel time". But need to choose between the 2 because together they create some bugg-->
@@ -214,8 +214,6 @@ export default {
 
         progress : String,
         rating : String,
-        //alert: String,
-
     },
 
     data() {
@@ -223,16 +221,16 @@ export default {
         return {
             // duration timer dynamization
             anwserAllowedTime: 0,
-
             interval: {},
             value: 30,
-            color : '#FFD13B',
-            shadowStyleChange : 'text-shadow: 2px 1.5px #FF03A4',
+            color: '#FFD13B',
+            shadowStyleChange: 'text-shadow: 2px 1.5px #FF03A4',
 
-            readonly : Boolean,
-
+            readonly: Boolean,
             userAnswer: '',
-            //alertDirection:'',
+
+            artistFound: false,
+            titleFound: false,
 
             // list of all the songs into the playlist
             audios: null,
@@ -293,8 +291,8 @@ export default {
             closeCross: '',
 
             // DOC https://fr.vuejs.org/v2/guide/class-and-style.html
-            classAnswerRight: false,
-            classAnswerFail: false,
+            classAlertRight: false,
+            classAlertFail: false,
 
             sentence : '',
             bgStyleWhenPopup: '',
@@ -545,8 +543,11 @@ export default {
             // reset the timer for every new song
             this.value = 30;
             this.readonly = false;
+            this.artistFound = false;
+            this.titleFound = false;
 
             if(this.currentAudio) {
+
                 // only for the debug ! this is the indexAudio which set the current song played
                 // this.currentAudio.classList.remove('current');
                 this.currentAudio.pause();
@@ -564,8 +565,8 @@ export default {
                 // alert.classList.remove('fail', 'right');
                 alert.textContent = '';
 
-                this.classAnswerRight = false;
-                this.classAnswerFail = false;
+                this.classAlertRight = false;
+                this.classAlertFail = false;
 
                 // otherwise we play the next song
                 this.indexAudio++;
@@ -604,18 +605,19 @@ export default {
 
             // target currentAudio artist and title answer
             let artistAnswer = this.playlist.musics[this.indexAudio].artist[0];
-
             let musicTitleAnswer = this.playlist.musics[this.indexAudio].musicTitle;
+
             let alert = document.getElementById("alert");
 
             if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase()){
-
-                this.classAnswerRight = true;
-                this.classAnswerFail = false;
+                console.log('artist found');
                 this.playlist.musics[this.indexAudio].artistFound = true;
+                this.artistFound = true;
 
-                if(this.playlist.musics[this.indexAudio].artistFound === true && (this.playlist.musics[this.indexAudio].titleFound === true)){
+                this.changeClassesAlert(this.artistFound);
 
+                if(this.artistFound && this.titleFound){
+                    console.log('artist found et titre deja ok');
                     this.displayUserDirectionsIfSuccess();
 
                     this.readonly = true;
@@ -623,17 +625,23 @@ export default {
                 else {
 
                     alert.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
+
+                    // this.alertDirection.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
+
                 }
                 this.userAnswer = '';
             }
             else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()){
 
-                this.classAnswerRight = true;
-                this.classAnswerFail = false;
+                console.log('title found');
+
                 this.playlist.musics[this.indexAudio].titleFound = true;
+                this.titleFound = true;
 
-                if(this.playlist.musics[this.indexAudio].titleFound === true && (this.playlist.musics[this.indexAudio].artistFound === true)) {
+                this.changeClassesAlert(this.titleFound);
 
+                if(this.titleFound && this.artistFound) {
+                    console.log('title found et artist deja ok');
                     this.displayUserDirectionsIfSuccess();
 
                     this.readonly = true;
@@ -641,13 +649,16 @@ export default {
                 else {
 
                     alert.textContent = 'Bravo tu as trouvé le titre, connais-tu l\'artiste ?';
+                    //this.alertDirection = 'Bravo tu as trouvé le titre, connais-tu l\'artiste ?';
                 }
+
                 this.userAnswer = '';
 
             }
             else if (this.userAnswer.toLowerCase() !== artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() !== musicTitleAnswer.toLowerCase()){
-                this.classAnswerFail = true;
-                this.classAnswerRight = false;
+
+                this.changeClassesAlert(this.userAnswer == artistAnswer || this.userAnswer == musicTitleAnswer);
+
                 this.displayUserDirectionsIfFailure();
             }
 
@@ -655,9 +666,21 @@ export default {
 
         },
 
-        displayUserDirectionsIfSuccess() {
+        changeClassesAlert(answer = ''){
 
-            //this.classAnswerRight = true;
+            if(answer === true){
+
+                this.classAlertRight = true;
+                this.classAlertFail = false;
+            }
+            else if(answer === false){
+
+                this.classAlertFail = true;
+                this.classAlertRight = false;
+            }
+        },
+
+        displayUserDirectionsIfSuccess() {
 
             // target the alert div
             let alert = document.getElementById("alert");
@@ -667,6 +690,7 @@ export default {
 
             let personalizedDirections = _.sample(this.userDirections.ifSuccess);
             alert.textContent = personalizedDirections;
+            //this.alertDirection = personalizedDirections;
 
         },
 
@@ -680,6 +704,8 @@ export default {
             let personalizedDirections = _.sample(this.userDirections.ifFailure);
 
             alert.textContent = personalizedDirections;
+            //this.alertDirection = personalizedDirections;
+
         },
 
 
@@ -739,7 +765,7 @@ export default {
             this. buttonsGameNoneStyle='display:none';
 
             this.points = this.playlist.points;
-            
+
             this.displayScoreSentence();
         },
 
@@ -754,18 +780,18 @@ export default {
                 // gives a random element of the array as output
                 let personalizedSentenceScore = _.sample(this.scoreSentence.zeroToNine);
                 this.sentence = personalizedSentenceScore;
-                
+
             } else if (this.points >= 10 && this.points <= 16) {
 
                 let personalizedSentenceScore = _.sample(this.scoreSentence.tenToSixteen);
                 this.sentence = personalizedSentenceScore;
-                
+
 
             } else if (this.points >= 17 && this.points <= 18){
 
                 let personalizedSentenceScore = _.sample(this.scoreSentence.seventeenToEighteen);
                 this.sentence = personalizedSentenceScore;
-                
+
 
             } else if (this.points >= 19 && this.points <= 20){
 
@@ -782,7 +808,7 @@ export default {
             this.bgStyleWhenPopup = "display: none";
             this.playagainButtonStyle= 'display:block';
         }
-       
+
     }, //end of methods
 
     beforeDestroy () {
@@ -816,7 +842,7 @@ export default {
         text-shadow: 2px 1.5px $color-pink-f0f;
         font-size: $spacing-double;
         text-align: center;
-        color: $color-turquoise;  
+        color: $color-turquoise;
         padding: 1rem 0 1rem 0;
         margin-bottom: 3rem;
     }
@@ -834,8 +860,8 @@ export default {
 
             border: solid 6px #f0f;
         }
-    } 
-    
+    }
+
     h2 {
             text-transform: uppercase;
             animation: glow 1s ease-in-out infinite alternate;
@@ -866,7 +892,7 @@ export default {
         background-color: white ;
         box-shadow: 6px 6px 0px $color-pink-f0f;
         margin: 1rem 0 4rem 0;
-        
+
         i {
             color: $color-pink-f0f;
         }
@@ -884,17 +910,17 @@ export default {
         .notice__title {
 
             text-align: center;
-            font-weight: bold; 
-            margin: 0px; // to overpassed vuejs 
+            font-weight: bold;
+            margin: 0px; // to overpassed vuejs
             border-bottom: 1px solid $color-pink-f0f;
             font-size: 1rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             font-style: italic;
-            
+
         }
 
-    }  
+    }
 
     .question {
 
@@ -914,7 +940,7 @@ export default {
                 .alertBlock {
 
                     margin-top: $spacing-double;
-        
+
                     #alert {
 
                         border-radius: 1rem;
@@ -928,7 +954,7 @@ export default {
 
                         background-color: #d1e7dc;
                         color: #39903b;
-                       
+
                     }
 
                     .fail {
@@ -948,28 +974,28 @@ export default {
                     outline-style: none
                 }
             }
-    }    
+    }
 
-    .v-progress-circular{ 
+    .v-progress-circular{
 
         text-align: center;
         width: 80%;
         font-family: "Lazer84";
         text-shadow: 2px 1.5px$color-pink-f0f;
-        
+
     }
 
     .button {
 
-        text-align: center;  
+        text-align: center;
     }
 
     .button__start,
     .button__next,
     .button__replay {
-        
+
         background-color: $color-yellow;
-        border: none; 
+        border: none;
         color: white;
         font-size: 20px;
         border-radius: 10px;
@@ -994,7 +1020,7 @@ export default {
 
         position: fixed;
         top: 8px;
-        left: 16px; 
+        left: 16px;
         height: 100%;
         width: 100%;
         background-color: $color-dark-blue;
@@ -1007,7 +1033,7 @@ export default {
 
         position: fixed;
         top: 20%;
-        left: 10%; 
+        left: 10%;
         color: black;
     }
 
@@ -1018,8 +1044,8 @@ export default {
         margin: $spacing-double auto $spacing-double auto;
         padding: $spacing-simple;
         border: 2px solid $color-pink-f0f;
-        
-    
+
+
         h3 {
 
             font-family: "Lazer84" !important;
@@ -1050,7 +1076,7 @@ export default {
 
                 margin-left: $spacing-simple;
                 font-size: 0.8rem;
-                
+
                 .titleAnswer,
                 .artistAnswer {
 
@@ -1069,7 +1095,7 @@ export default {
 
 .v-application {
 
-    all: unset; 
+    all: unset;
     font-family: "Roboto", sans-serif;
     line-height: 1.5;
 }
@@ -1096,10 +1122,10 @@ export default {
         padding-top: $spacing-double;
 
         .question .answer  {
-            
+
             width: 60%;
-        }  
-                
+        }
+
         .answersBlock {
 
             h3 {
@@ -1116,10 +1142,10 @@ export default {
                 }
 
                 .titleAndArtistAnswer {
-                
+
                     font-size: 1rem;
                 }
-            } 
+            }
         }
     }
 }
@@ -1133,10 +1159,10 @@ export default {
         }
 
         .question .answer {
-            
+
             width: 50%;
         }
-        
+
         .answersBlock {
             // debug
             //border: solid 3px #f0f;
@@ -1162,14 +1188,14 @@ export default {
                     .imgAnswer {
 
                         width: 25%;
-                    } 
-                
+                    }
+
                 .titleAndArtistAnswer {
 
                     margin-left: $spacing-simple;
                     font-size: 1rem;
                     width: 75%;
-                    
+
                     .titleAnswer,
                     .artistAnswer {
 
@@ -1204,11 +1230,11 @@ export default {
             input[type='text'] {
 
                 width: 60%;
-            }   
+            }
         }
 
         .answerDisplay {
-            
+
             display: flex;
             align-items: center;
             width: 33%;
