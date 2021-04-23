@@ -81,10 +81,11 @@
 
 
 
-            <div class="answer" :style="answerCurrentStyle" >
-
+            <div class="answer"
+            :style="answerCurrentStyle"
+            >
                 <div class="alertBlock">
-                    <p id="alert" class=""></p> <!-- attention keep the empty class, used to add a class 'fail' or 'success' in the method checkUserAnswer-->
+                    <p id="alert" :class="{right: classAlertRight, fail: classAlertFail}"></p>
                 </div>
 
                 <!-- if we want we can use v-on:keyup="checkUserAnswer to validate the user response in "reel time". But need to choose between the 2 because together they create some bugg-->
@@ -220,7 +221,6 @@ export default {
 
         progress : String,
         rating : String,
-
     },
 
     data() {
@@ -229,15 +229,16 @@ export default {
 
             // duration timer dynamization
             anwserAllowedTime: 0,
-
             interval: {},
             value: 30,
-            color : '#FFD13B',
-            shadowStyleChange : 'text-shadow: 2px 1.5px #FF03A4',
+            color: '#FFD13B',
+            shadowStyleChange: 'text-shadow: 2px 1.5px #FF03A4',
 
-            readonly : Boolean,
-
+            readonly: Boolean,
             userAnswer: '',
+
+            artistFound: false,
+            titleFound: false,
 
             // list of all the songs into the playlist
             audios: null,
@@ -296,6 +297,10 @@ export default {
             points: 0,
             stylePopup: 'display: none',
             closeCross: '',
+
+            // DOC https://fr.vuejs.org/v2/guide/class-and-style.html
+            classAlertRight: false,
+            classAlertFail: false,
 
             sentence : '',
             bgStyleWhenPopup: '',
@@ -391,8 +396,11 @@ export default {
             // reset the timer for every new song
             this.value = 30;
             this.readonly = false;
+            this.artistFound = false;
+            this.titleFound = false;
 
             if(this.currentAudio) {
+
                 // only for the debug ! this is the indexAudio which set the current song played
                 // this.currentAudio.classList.remove('current');
                 this.currentAudio.pause();
@@ -407,15 +415,18 @@ export default {
 
                 // clean the alert before the new song begins
                 let alert = document.getElementById("alert");
-                alert.classList.remove('fail', 'right');
+                // alert.classList.remove('fail', 'right');
                 alert.textContent = '';
+
+                this.classAlertRight = false;
+                this.classAlertFail = false;
 
                 // otherwise we play the next song
                 this.indexAudio++;
 
                 this.currentAudio = this.audios[this.indexAudio];
 
-                this.currentAudio.classList.add('current');
+                //this.currentAudio.classList.add('current');
 
                 // DOC https://developer.mozilla.org/fr/docs/Web/API/HTMLMediaElement/play
                 this.currentAudio.play();
@@ -447,58 +458,78 @@ export default {
 
             // target currentAudio artist and title answer
             let artistAnswer = this.playlist.musics[this.indexAudio].artist[0];
-
             let musicTitleAnswer = this.playlist.musics[this.indexAudio].musicTitle;
 
-            // toLowerCase() : method returns the calling string value converted to lower case.
-            // if the artist answer entered by the user is correct OR the music title answer entered by the user is correct
-            if (this.userAnswer.toLowerCase() === artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase())
-            {
-                // target the "div alert" to add the class "right" and display the matching CSS and text
-                // need to remove the class before to avoid class superposition
-                let alert = document.getElementById("alert");
-                alert.classList.remove('fail');
-                alert.classList.add('right');
+            let alert = document.getElementById("alert");
 
-                // save the validated answer & the time at which the user found it
-                if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase() && (this.playlist.musics[this.indexAudio].titleFound === true)){
+            if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase()){
+                console.log('artist found');
+                this.playlist.musics[this.indexAudio].artistFound = true;
+                this.artistFound = true;
 
-                   this.playlist.musics[this.indexAudio].artistFound = true;
-                   //console.log(this.playlist.musics[this.indexAudio].artistFound);
-                   this.displayUserDirectionsIfSuccess();
+                this.changeClassesAlert(this.artistFound);
 
-                   this.readonly = true;
-
-                }
-                else if(this.userAnswer.toLowerCase() === artistAnswer.toLowerCase()){
-
-                    this.playlist.musics[this.indexAudio].artistFound = true; 
-                    alert.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
-                }
-                else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase() && (this.playlist.musics[this.indexAudio].artistFound === true)) {
-
-                    this.playlist.musics[this.indexAudio].titleFound = true;
+                if(this.artistFound && this.titleFound){
+                    console.log('artist found et titre deja ok');
                     this.displayUserDirectionsIfSuccess();
-
 
                     this.readonly = true;
                 }
-                else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()){
+                else {
 
-                    this.playlist.musics[this.indexAudio].titleFound = true;
+                    alert.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
+
+                    // this.alertDirection.textContent = 'Bravo tu as trouvé l\'artiste, connais-tu le titre ?';
+
+                }
+                this.userAnswer = '';
+            }
+            else if(this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase()){
+
+                console.log('title found');
+
+                this.playlist.musics[this.indexAudio].titleFound = true;
+                this.titleFound = true;
+
+                this.changeClassesAlert(this.titleFound);
+
+                if(this.titleFound && this.artistFound) {
+                    console.log('title found et artist deja ok');
+                    this.displayUserDirectionsIfSuccess();
+
+                    this.readonly = true;
+                }
+                else {
 
                     alert.textContent = 'Bravo tu as trouvé le titre, connais-tu l\'artiste ?';
+                    //this.alertDirection = 'Bravo tu as trouvé le titre, connais-tu l\'artiste ?';
                 }
 
-                this.playlist.musics[this.indexAudio].elapsedTimeForAnswer = 30 - this.value;
-
-                // if the answer is correct we clean the input
                 this.userAnswer = '';
 
-                // if the artist answer entered by the user is incorrect or the music title answer entered by the user is incorrect
-            } else if (this.userAnswer.toLowerCase() !== artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() === musicTitleAnswer.toLowerCase())
-            {
+            }
+            else if (this.userAnswer.toLowerCase() !== artistAnswer.toLowerCase() || this.userAnswer.toLowerCase() !== musicTitleAnswer.toLowerCase()){
+
+                this.changeClassesAlert(this.userAnswer == artistAnswer || this.userAnswer == musicTitleAnswer);
+
                 this.displayUserDirectionsIfFailure();
+            }
+
+            this.playlist.musics[this.indexAudio].elapsedTimeForAnswer = 30 - this.value;
+
+        },
+
+        changeClassesAlert(answer = ''){
+
+            if(answer === true){
+
+                this.classAlertRight = true;
+                this.classAlertFail = false;
+            }
+            else if(answer === false){
+
+                this.classAlertFail = true;
+                this.classAlertRight = false;
             }
         },
 
@@ -511,21 +542,21 @@ export default {
             // and then display the element in the above input
             let personalizedDirections = _.sample(this.userDirections.ifSuccess);
             alert.textContent = personalizedDirections;
+            //this.alertDirection = personalizedDirections;
 
         },
 
         displayUserDirectionsIfFailure() {
 
-            // target the "div alert" to add the class "fail" and display the matching CSS and text 
-            // need to remove the class before to avoid class superposition 
+            // target the "div alert" to add the class "fail" and display the matching CSS and text
             let alert = document.getElementById("alert");
-            //alert.classList.remove('right');
-            alert.classList.add('fail');
 
             // gives a random element of the array userDirections declare in  data area as output
-            // and then display the element in the above input 
+            // and then display the element in the above input
             let personalizedDirections = _.sample(this.userDirections.ifFailure);
+
             alert.textContent = personalizedDirections;
+            //this.alertDirection = personalizedDirections;
 
         },
 
@@ -542,11 +573,11 @@ export default {
             this.albumThumbnail = this.playlist.musics[indexAudio].albumThumbnail;
 
             // DOC https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
-            this.answers.unshift([this.idMusic, this.artist, this.musicTitle, this.albumThumbnail]); 
+            this.answers.unshift([this.idMusic, this.artist, this.musicTitle, this.albumThumbnail]);
 
         },
 
-        // method for calculate points according to user's response it's true are false, useful for display points in the popup 
+        // method for calculate points according to user's response it's true are false, useful for display points in the popup
         calculatePoints(){
 
             // calculation of points according to the answers found (1 points for the artist, 1 points for the title)
