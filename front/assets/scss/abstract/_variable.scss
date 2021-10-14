@@ -1,0 +1,26 @@
+$font-size: 16px;
+$font-size-big: 1.3rem;
+$font-size-biggest: 1.5rem;
+
+
+// ======== COLOR ========
+$color-dark-blue: #0f0643;
+$color-dark-blue-bis: #0f0643c7;
+//$color-dark-blue-bis: #01dcbb17;
+//$color-dark-blue-bis: rgba(255, 0, 255, 0.08);
+$color-blue : #120178;
+$color-dark-purple: #631673;
+$color-purple: #8E298D;
+$color-pink-f0f: #FF03A4;
+$color-pink: #FF367B;
+$color-turquoise: #01DCBC;
+$color-yellow: #FFD13B;
+
+
+// ======== SPACING========
+$spacing-simple: 1rem;
+$spacing-half: calc(#{$spacing-simple} / 2);
+$spacing-double: calc(#{$spacing-simple} * 2);
+$spacing-medium: 5rem;
+$spacing-large: 10rem;
+$spacing-XXL: 30rem;

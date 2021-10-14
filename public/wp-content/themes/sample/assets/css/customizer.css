@@ -1,0 +1,9 @@
+header.customizer h2 {
+  display: inline-block;
+  position: relative;
+}
+
+header.customizer .customize-partial-edit-shortcut {
+  right: -50px;
+  top : 5px;
+}

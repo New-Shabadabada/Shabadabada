@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "deployer/recipes": "^6.2"
+    },
+    "config": {
+        "vendor-dir": "static-vendor"
+    }
+}

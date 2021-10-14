@@ -1,0 +1,15 @@
+
+{
+    "require": {
+        "altorouter/altorouter": "^2.0"
+    },
+
+
+    "autoload": {
+        "psr-4": {"Shabadabada\\": "./class"}
+    },
+
+    "config": {
+        "vendor-dir": "static-vendor"
+    }
+}

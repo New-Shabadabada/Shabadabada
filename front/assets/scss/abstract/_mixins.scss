@@ -1,0 +1,61 @@
+// resolutions management
+@mixin screen-small {
+    @media (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin screen-medium {
+    @media (min-width: 600px) {
+        @content;
+    }
+}
+
+@mixin screen-large {
+    @media (min-width: 900px) {
+        @content;
+    }
+}
+
+@mixin screen-extra-large {
+    @media (min-width: 1200px) { 
+        @content;
+    }
+}
+
+@mixin screen-huge {
+    @media (min-width: 1800px) {
+        @content;
+    }
+}
+
+
+@mixin debug {
+    border: solid 2px #f0f;
+    margin: 1rem;
+    @content;
+}
+
+@mixin debug2 {
+    border: solid 2px #ff0;
+    margin: 1rem;
+    @content;
+}
+
+@mixin debug3 {
+    border: solid 2px red;
+    margin: 1rem;
+    @content;
+}
+
+@mixin debug4 {
+    border: solid 2px  orange;
+    margin: 1rem;
+    @content;
+}
+
+@mixin debug5 {
+    border: solid 2px green;
+    margin: 1rem;
+    @content;
+}

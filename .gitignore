@@ -1,0 +1,43 @@
+deploy-configuration.php
+configuration/*
+!configuration/.htaccess
+!configuration/00-configuration.sample.php
+!configuration/index.html
+
+
+
+# ignorer les dossiers et fichiers nommés ".cache" dans TOUTE l'aboresence
+# si on avait mis /.cache, on aurait ignoré que les répértoires et les fichiers nommés ".cache" qui se trouveraient à la racine du projet
+.cache
+dist
+node_modules
+package-lock.json
+
+
+public/front
+
+
+composer.lock
+vendor
+
+public/.htaccess
+public/wp
+# public/configuration-current.php
+
+public/wp-content/*
+!public/wp-content
+
+public/wp-content/themes/*
+!public/wp-content/themes
+!public/wp-content/themes/sample
+
+public/wp-content/plugins/*
+!public/wp-content/plugins/
+!public/wp-content/plugins/sample-plugin
+!public/wp-content/plugins/shabadabada
+
+# wp-content/plugins/sample-plugin/tests
+# wp-content/plugins/sample-plugin/.phpcs.xml.dist
+# wp-content/plugins/sample-plugin/bin
+# wp-content/plugins/sample-plugin/.travis.yml
+# wp-content/plugins/sample-plugin/phpunit.xml.dist

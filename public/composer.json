@@ -1,0 +1,45 @@
+{
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org",
+            "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+        }
+    ],
+
+    "extra": {
+        "wordpress-install-dir": "wp"
+    },
+
+    "require": {
+        "johnpbloch/wordpress": "^5.6",
+        "wpackagist-theme/zubin": "*",
+        "wpackagist-theme/zubin-music": "*",
+        "wpackagist-theme/twentytwentyone": "^1.0",
+
+        "wpackagist-plugin/html-editor-syntax-highlighter": "*",
+        "wpackagist-plugin/classic-editor": "*",
+        "wpackagist-plugin/query-monitor": "*",
+        "wpackagist-plugin/jwt-auth": "*"
+
+    },
+
+    "scripts": {
+
+        "activate-theme": "wp theme activate ",
+        "activate-plugins": "wp plugin activate --all",
+        "activate-htaccess": "wp rewrite structure '/%year%/%monthnum%/%postname%/' --hard",
+        "chmod": [
+            "sudo chgrp -R www-data .",
+            "sudo find . -type f -exec chmod 664 {} +",
+            "sudo find . -type d -exec chmod 774 {} +",
+            "touch .htaccess",
+            "sudo chmod 644 .htaccess"
+        ],
+
+        "wp-install-application-passwords": "wp plugin install application-passwords --activate",
+        "wp-install-classic-editor": "wp plugin install classic-editor --activate",
+        "wp-install-jwt": "wp plugin install jwt-auth --activate",
+        "wp-install-jwt2": "wp plugin install jwt-authentication-for-wp-rest-api --activate"
+    }
+}
