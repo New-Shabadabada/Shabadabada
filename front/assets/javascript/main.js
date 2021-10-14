@@ -20,7 +20,7 @@ import 'vuetify/dist/vuetify.css';
 import '@mdi/font/css/materialdesignicons.min.css';
 
 
-// Vuetify configuration with vuejs 
+// Vuetify configuration with vuejs
 Vue.use(Vuetify);
 const opts = {};
 const vuetifyInstance = new Vuetify(opts);
