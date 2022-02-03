@@ -1,19 +1,19 @@
 <template>
 
-    <footer> 
+    <footer>
 
         <div class="footer">
 
             <div class="text-footer">
-                <p> Ce site est fait avec <i class="fas fa-heart"></i> </p> 
+                <p> Ce site est fait avec <i class="fas fa-heart"></i> </p>
             </div>
 
             <div class="copyright-footer">
 
                 <p class="copyright-oz">
-                    Copyright <i class="far fa-copyright"></i> 2021 - Promo Oz 
-                </p> 
-                
+                    Copyright <i class="far fa-copyright"></i> 2021 - Promo Oz
+                </p>
+
                 <p class="copyright-icons">
                     Icons by<a href="https://icons8.com/icon/"> Icons8</a> and <a href="https://seeklogo.com/">seeklogo</a>
                 </p>

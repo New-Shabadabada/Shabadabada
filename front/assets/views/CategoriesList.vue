@@ -64,14 +64,11 @@ export default {
 section{
 
     display : flex;
-    // voir pour un flex direction column plutôt que flex-wrap
-    //flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     min-width: 100%;
     margin-top: $spacing-medium;
-
 
     h1{
         font-family: "Lazer84";
@@ -83,11 +80,9 @@ section{
         text-shadow: 2px 1.5px $color-pink-f0f;
         padding-top: 1rem;
     }
-
 }
 
 .all{
-
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
@@ -105,7 +100,6 @@ section{
 }
 
 .titlePage{
-
     font-size : 2rem;
     color: $color-turquoise;
     font-weight: bold;
@@ -134,7 +128,6 @@ section{
     }
 
     .cards{
-
         justify-content: center;
         align-content: center;
         padding: 0.7rem 0.9rem 0.7rem 0.9rem;

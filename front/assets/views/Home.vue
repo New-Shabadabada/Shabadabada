@@ -3,7 +3,7 @@
         <div class="home__part1" :style="styleCatchline">
 
             <div class="home__catchline">
-
+                <!-- TODO : make transition for home page -->
                 <transition name="bounce1">
                     <p class="word1">wanna</p>
                 </transition>
@@ -76,7 +76,6 @@ export default {
     name: "shabadabada-home",
 
     data(){
-
         return {
             styleCatchline:'',
             styleRules: 'display: none',
@@ -84,14 +83,11 @@ export default {
     },
 
     methods: {
-
         rules(){
             this.styleCatchline = 'display:none';
             this.styleRules = 'display: block';
         }
     },
-
-
 }
 </script>
 
@@ -101,14 +97,12 @@ export default {
 @import '../scss/main.scss';
 
 .home__part1 {
-
     display: flex;
     flex-direction: column;
     max-width: 100%;
     height: 100%;
 
     .home__catchline {
-
         display: flex;
         flex-direction: column;
         color: $color-pink-f0f;
@@ -121,12 +115,10 @@ export default {
     }
 
     .button {
-
         align-self: center;
     }
 
     .button__click-here {
-
         background-color: $color-yellow;
         border: none;
         color: white;
@@ -147,13 +139,10 @@ export default {
 }
 
 .home__part2 {
-
     .home__introduction {
-
         text-align: center;
 
         h1 {
-
             font-family: "Lazer84";
             color: $color-turquoise;
             font-size: 2.5rem;
@@ -164,7 +153,6 @@ export default {
         }
 
         h2 {
-
             font-family: "Montserrat";
             font-size: 20px;
             color: white;
@@ -174,7 +162,6 @@ export default {
     }
 
     h3 {
-
         align-items: flex-start;
         font-family: "Lazer84";
         color : $color-yellow;
@@ -186,7 +173,6 @@ export default {
     }
 
     .home__explanation {
-
         display : flex;
         flex-direction: column;
         color: white;
@@ -196,12 +182,10 @@ export default {
 
         .number,
         .rule {
-
             height: 100%;
         }
 
         .rules {
-
             display: flex;
             justify-content: space-around;
             align-items: flex-start;
@@ -210,7 +194,6 @@ export default {
             padding-right: 3rem;
 
             .number {
-
                 width: 10%;
                 text-align: center;
                 background-color: $color-yellow;
@@ -227,7 +210,6 @@ export default {
             }
 
             .rule {
-
                 margin-left: 1rem;
                 width: 80%;
                 font-size: 20px;
@@ -236,12 +218,10 @@ export default {
     }
 
     .button {
-
        text-align: center;
     }
 
     .button__play {
-
         background-color: $color-yellow;
         border: none;
         color: white;
@@ -260,58 +240,45 @@ export default {
 
 }
 .v-application p {
-
     margin-bottom: 0px;
 }
 
 // ========= Media queries =========//
 
 @include screen-small {
-
     .home__part2 h3 {
-
         margin-left: 0;
     }
 }
 @include screen-medium{
-
     .home {
-
         margin-top: $spacing-simple;
     }
 
     .home__catchline {
-
         margin: 0 5rem 0 5rem;
 
         .word1 {
-
             align-self: start;
         }
 
         .word2 {
-
             align-self: center;
             margin-left: $spacing-double;
         }
 
         .word3 {
-
             align-self: flex-end;
         }
     }
 
     .home__part2 {
-
-
         .home__introduction h1 {
-
             font-size: 4rem;
             padding-top: 1rem;
         }
 
         .home__introduction h2 {
-
             font-size: 1.5rem;
             color: white;
             text-align: center;
@@ -327,22 +294,18 @@ export default {
 
         h3,
         .home__explanation {
-
             padding: 0 5rem 0 5rem;
         }
 
         .home__explanation {
-
             font-size: 1.2rem;
         }
 
         .home__explanation .rules .number {
-
             width: 15%;
         }
 
         .button {
-
             margin-top: 3rem;
         }
     }
@@ -350,22 +313,18 @@ export default {
 
 
 @include screen-large{
-
     .home__catchline {
-
         line-height: 10rem;
 
         .word1,
         .word2,
         .word3 {
-
            font-size: 8rem;
         }
 
     }
 
     .home__part2 {
-
         h3 {
             margin-top: 6rem;
             text-align: center;
@@ -373,7 +332,6 @@ export default {
 
         .rule1,
         .rule2 {
-
             padding-right : 1rem;
         }
 
@@ -383,53 +341,41 @@ export default {
 
 
 @include screen-extra-large{
-
     .home__part1 {
-
         .home__catchline {
-
             font-size: 8rem;
             margin: 0 10rem 0 10rem;
 
             .word1,
             .word2,
             .word3 {
-
                 font-size: 10rem;
             }
         }
 
         .button .button__click-here {
-
             padding: 10px 20px;
             margin: 4.8rem 0 $spacing-simple 0;
             font-size: 1.5rem;
         }
-
     }
 
     .home__part2 {
-
         .home__explanation {
-
             flex-direction: row;
             align-items: flex-start;
 
             .rules {
-
                 padding: 0 3rem 0 3rem;
 
                 .rule {
                     font-size: 1.5rem;
                 }
-
-
             }
         }
 
         h3,
         .home__explanation {
-
             padding: 0 10rem 0 10rem;
         }
 
@@ -438,7 +384,6 @@ export default {
         }
 
         .button .button__play {
-
             padding: 10px 20px;
             margin: 0.5rem 0 $spacing-half 0;
             font-size: 1.5rem;

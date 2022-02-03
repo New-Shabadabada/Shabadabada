@@ -1,7 +1,9 @@
+<!-- AMANDINE - 404 page - make with template exemple-->
+
 <template>
     <div class="wrapper">
 
-       <div class="grid"></div>
+      <div class="grid"></div>
       <div class="lines"></div>
         <h1>
           <span>ERREUR 404</span>
@@ -21,8 +23,6 @@
     </div>
 </template>
 
-
-
 <script>
 export default {
     name: "shabadabada-error404",
@@ -30,10 +30,6 @@ export default {
     },
 }
 </script>
-
-
-
-
 
 <style scoped lang="scss">
 @import '../scss/main.scss';

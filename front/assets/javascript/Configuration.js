@@ -1,15 +1,14 @@
-// WIP not use for now but useful to dynamise the endpoint later
+// TODO not use for now but useful to dynamise the endpoint later
 // console.log('%c' + "configuration.js loaded", 'color: #0bf; font-size: 1rem; background-color:#fff');
 
 
-export default class Configuration 
+export default class Configuration
 {
-
-environments = {
+  environments = {
 
   _default: {
     urls: {
-      
+
       musicList: '/wp-json/wp/v2/music?_embed',
       playlist : '/wp-json/shabadabada/v1/create-game',
       categories: '/wp-json/wp/v2/music-type',

@@ -208,23 +208,19 @@ export default {
     name: "shabadabada-game",
 
     created() {
-
         this.load();
     },
 
     components: {
-
         'shabadabada-popup': Popup,
     },
 
     props:{
-
         progress : String,
         rating : String,
     },
 
     data() {
-
         return {
 
             //==== Title page ====//
@@ -550,8 +546,9 @@ export default {
         },
 
 
-        // method to display tracks's informations that the user has already listened to
-        // majout de indexAudio en paramètre pour pouvoir gérer l'affichage de la dernière chanson sans répéter le code
+        // AMANDINE method to display tracks's informations that the user has already listened to
+        // add "indexAudio" in parameter for manage displaying of last song whithout repeat code
+
         displayAnswer(indexAudio = this.indexAudio -1){
 
             // retrieve artist, musicTitle and albumThumbnail listened
@@ -566,7 +563,7 @@ export default {
 
         },
 
-        // method for calculate points according to user's response it's true are false, useful for display points in the popup
+        // AMANDINE method for calculate points according to user's response it's true are false, useful for display points in the popup
         calculatePoints(){
 
             // calculation of points according to the answers found (1 points for the artist, 1 points for the title)
@@ -596,13 +593,14 @@ export default {
             //call function calculatePoints for the last song
             this.calculatePoints();
 
-            this.stylePopup = 'display: block';
-            this.nextButtonStyle = 'display: none';
+            // Manage title, popup, buttons, answers display
+            this.titleOnGameStyle='display:none';
+            this.titleEndGameStyle= 'display:block';
             this.progressCircularStyle = 'display: none';
+            this.nextButtonStyle = 'display: none';
+            this.stylePopup = 'display: block';
             this.bgStyleWhenPopup = "display: block";
             this.answerDisplayStyle= 'display:none';
-            this.titleEndGameStyle= 'display:block';
-            this.titleOnGameStyle='display:none';
             this. buttonsGameNoneStyle='display:none';
 
             this.points = this.playlist.points;
@@ -648,7 +646,6 @@ export default {
     }, //end of methods
 
     beforeDestroy () {
-
         clearInterval(this.interval)
     },
 
@@ -659,8 +656,6 @@ export default {
 
 <style scoped lang="scss">
 @import '../scss/main.scss';
-
-
 
 .game  {
 
