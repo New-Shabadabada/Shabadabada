@@ -17,7 +17,7 @@
                 <p class="copyright-icons">
                     Icons by<a href="https://icons8.com/icon/"> Icons8</a> and <a href="https://seeklogo.com/">seeklogo</a>
                 </p>
-                
+
                 <p class="copyright-bg">
                     Fond vecteur créé par rawpixel.com - <a href="https://fr.freepik.com/vecteurs/fond"> fr.freepik.com</a>
                 </p>

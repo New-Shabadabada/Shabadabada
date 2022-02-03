@@ -54,6 +54,7 @@ class Api
     public function createGame()
     {
         // IMPORTANT retrieve category's id or category's slug
+        // useful for future uses of other Deezer Api endpoints
         $category = filter_input(\INPUT_GET, 'category');
 
         $musics = new Music();

@@ -20,7 +20,8 @@ class DeezerApo
         */
         foreach($dataApo as $category => $musicData){
 
-            //insert categories in data base and in custom taxonoy "type"
+            //insert categories in data base and in custom taxonomy "type"
+            // DOC - Taxonomy existing - https://developer.wordpress.org/reference/functions/term_exists/
             $typeId = term_exists($category, 'music-type');
 
             if (!$typeId) {
@@ -30,9 +31,9 @@ class DeezerApo
             // Loop for iterate $musicData array
             foreach($musicData as $artist => $track){
 
-
                 $url = 'https://api.deezer.com/search?q=artist:"' . $artist . '"track:"' . $track . '"';
 
+                // define below
                 $this->insertBoWp($url, $category);
                 $this->breakPoint();
 
@@ -46,17 +47,13 @@ class DeezerApo
 
 
     /**
-     * Insertion method in wordpress back office 
+     * Insertion method in wordpress back office
     *
     * @param [type] $url
     * @return void
     */
     public function insertBoWp($url, $category = '')
     {
-        // test zone //
-        //$url = 'https://api.deezer.com/search?q=artist:"eminem"';
-        //test zone //
-
         // DOC https://www.php.net/manual/fr/function.file-get-contents.php
         // $endContent contains the response of api deezer
         $endpointContent = file_get_contents($url);
@@ -65,15 +62,10 @@ class DeezerApo
         // $responseEndpoint contains json response convert in php object
         $responseEndpoint = json_decode($endpointContent, true);
 
+        // Retrieve the first extracts for current search
         $musicData = $responseEndpoint['data'][0];
-        echo '<div style="border: solid 2px #F00">';
-            echo '<div style="; background-color:#CCC">@'.__FILE__.' : '.__LINE__.'</div>';
-            echo '<pre style="background-color: rgba(255,255,255, 0.8);">';
-                print_r($musicData);
-            echo '</pre>';
-        echo '</div>';
 
-        //define postId with wp_insert_post()
+        //define postId
         $postId = wp_insert_post([
             'post_type' => 'music',
             'post_status' => 'publish',
@@ -89,7 +81,6 @@ class DeezerApo
 
         //insert term in post music
         wp_set_post_terms($postId, $category, 'music-type');
-
     }
 
 

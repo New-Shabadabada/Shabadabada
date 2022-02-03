@@ -10,8 +10,7 @@ use WP_Query;
 class Music extends CoreModel
 {
     // public $category;
-    // public $track;
-    // public $number;
+    // public $playlist;
 
     // astract method CoreModel
     public static function delete($id){}

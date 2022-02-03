@@ -47,7 +47,7 @@
         </div>
         <!-- end Rules game -->
 
-        <!-- WIP create loop for audio's tags -->
+        <!-- TODO create loop for audio's tags -->
         <div class = "musicList">
             <audio v-on:ended="playSong" class="audio-player0 current" controls :src="source0"></audio>
             <audio v-on:ended="playSong" class="audio-player1" controls :src="source1"></audio>
@@ -114,7 +114,7 @@
                 :style="startButtonStyle"
             >
                 Start
-            <button>
+            </button>
 
 
             <button
@@ -124,7 +124,7 @@
                 :style="nextButtonStyle"
             >
                 Suivant
-            <button>
+            </button>
 
         </div>
 
@@ -140,12 +140,11 @@
             <button
                     class="button__replay"
                     type="button"
-
                 >
                     <router-link :to="{name: 'categoriesList'}" >
                     Rejouer
                 </router-link>
-                <button>
+            </button>
         </div>
 
         <!--STEP $emit step 3: we also add a custom event listener onto our component that listens out for 'displayNonePopup'. Our custom listener is waiting for the 'displayNonePopup'event to be fired. It will happen when the string 'displayNonePopup' is emitted from inside the 'popup.vue'-->
@@ -291,7 +290,7 @@ export default {
 
             //= Save game =//
             // TODO change this if needed (PROD vs DEVELOPMENT)
-            // WIP manage configuration's dev and configuration's prod
+            // TODO manage configuration's dev and configuration's prod
             getSaveGameEndpoint : 'http://localhost/Shabadabada/public/wp-json/shabadabada/v1/save-game',
             //getSaveGameEndpoint : 'http://ec2-54-211-13-201.compute-1.amazonaws.com/apo-Shabadabada/public/wp-json/shabadabada/v1/save-game',
 
@@ -348,6 +347,7 @@ export default {
             // the div element '.musicList', set an index for every audio children
             this.audios = document.querySelectorAll('.musicList audio');
 
+            // TODO : refacto this method in other function and call her here
             this.interval = setInterval(() => {
 
                 if (this.value <= 6 && this.value > 0) {
@@ -371,6 +371,7 @@ export default {
             , 1000);
 
             this.playSong();
+
             this.readonly = false;
             this.answerDisplayStyle= 'display:block';
             this.startButtonStyle = "display:none";
@@ -410,7 +411,7 @@ export default {
 
                 // clean the alert before the new song begins
                 let alert = document.getElementById("alert");
-                // alert.classList.remove('fail', 'right');
+
                 alert.textContent = '';
 
                 this.classAlertRight = false;
@@ -420,8 +421,6 @@ export default {
                 this.indexAudio++;
 
                 this.currentAudio = this.audios[this.indexAudio];
-
-                //this.currentAudio.classList.add('current');
 
                 // DOC https://developer.mozilla.org/fr/docs/Web/API/HTMLMediaElement/play
                 this.currentAudio.play();
@@ -444,8 +443,13 @@ export default {
         },
 
 
-        // method triggered when the user presses the enter key after entering a response in the input
-        checkUserAnswer: function (event) {
+        // method  after entering a response in the input
+        /**
+         * Method triggered when the user presses the enter key
+         * Save result of game (response validate or not, points)
+         * @param {*} event
+         */
+        checkUserAnswer(event) {
 
             // save the user trials & his answers as well (bonus)
             this.playlist.musics[this.indexAudio].triesCount++;
@@ -583,7 +587,6 @@ export default {
         endGame(){
             axios.post(this.getSaveGameEndpoint, this.playlist)
             .then(response => {
-
                this.playlist = response.data;
             });
 
