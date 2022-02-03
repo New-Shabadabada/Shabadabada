@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "altorouter/altorouter",
-            "version": "2.0.1",
-            "version_normalized": "2.0.1.0",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dannyvankooten/AltoRouter.git",
-                "reference": "127f6e96998708a31ef32252985bea82e3b03888"
+                "reference": "f6fede4f94ced7c22ba63a9b8af0bf2dc38e3cb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dannyvankooten/AltoRouter/zipball/127f6e96998708a31ef32252985bea82e3b03888",
-                "reference": "127f6e96998708a31ef32252985bea82e3b03888",
+                "url": "https://api.github.com/repos/dannyvankooten/AltoRouter/zipball/f6fede4f94ced7c22ba63a9b8af0bf2dc38e3cb2",
+                "reference": "f6fede4f94ced7c22ba63a9b8af0bf2dc38e3cb2",
                 "shasum": ""
             },
             "require": {
@@ -23,7 +23,7 @@
                 "phpunit/phpunit": "5.7.*",
                 "squizlabs/php_codesniffer": "3.4.2"
             },
-            "time": "2019-11-23T11:01:41+00:00",
+            "time": "2020-03-09T08:34:59+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -59,7 +59,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dannyvankooten/AltoRouter/issues",
-                "source": "https://github.com/dannyvankooten/AltoRouter/tree/2.0.1"
+                "source": "https://github.com/dannyvankooten/AltoRouter/tree/2.0.2"
             },
             "install-path": "../altorouter/altorouter"
         }

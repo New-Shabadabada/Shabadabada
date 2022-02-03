@@ -1,6 +1,6 @@
 <?php
 
-namespace Shabadabada;
+// data use for presentation project
 
 $dataApo = [
 

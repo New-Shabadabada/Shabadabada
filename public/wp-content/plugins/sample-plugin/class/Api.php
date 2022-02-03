@@ -400,6 +400,7 @@ class Api
     public function getPostData()
     {
         // récupération des données JSON envoyées en POST
+
         $json = file_get_contents('php://input');
 
         if($json) {

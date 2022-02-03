@@ -18,9 +18,6 @@
 
 <script>
 
-//=========== import services =============
-
-
 //=========== import components =============
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -53,7 +50,6 @@ export default {
 @import './scss/main.scss';
 
 .background {
-
     margin: 0 auto;
     background-image: url("./images/background-long.jpg");
     background-size: cover;
@@ -62,7 +58,6 @@ export default {
 }
 
 main {
-
     min-height: 100vh;
     width: 100%;
     display: flex;

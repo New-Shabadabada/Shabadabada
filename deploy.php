@@ -2,7 +2,6 @@
 // DOC php deployer https://deployer.org/
 /* DOC installer php deployer
 curl -LO https://deployer.org/deployer.phar
-sudo mv deployer.phar /usr/local/bin/dep
 sudo chmod +x /usr/local/bin/dep
 */
 
@@ -156,7 +155,7 @@ task('composer', function() {
 });
 
 
-// APO déployer le front 
+// APO déployer le front
 // dans /var/www/html/apo-Shabadabada
 // dep deployFront production
 task('deployFront', function() {

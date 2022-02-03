@@ -2,11 +2,12 @@
 
 namespace Shabadabada\Models;
 
-class Game extends CoreModel 
+/**
+ * Manage custom table Game in db : create, update, delete
+ */
+class Game extends CoreModel
 {
-
-    // table property
-    protected $id; 
+    protected $id;
     protected $custom_id;
     protected $game_data;
     protected $game_response;
@@ -15,20 +16,20 @@ class Game extends CoreModel
     protected $updated_at;
 
     /**
-     * Manage the custom table name
+     * Create table name
      *
      * @return string $tableName
      */
     public static function getTableName()
     {
         $database = static::getDatabase();
-        // $database->prefix enable us to get the WP table prefix 
+        // $database->prefix enable us to get the WP table prefix
         $tableName = $database->prefix . 'game';
         return $tableName;
     }
 
     /**
-     * Create our DB custom table 
+     * Create custom table Game
      *
      * @return void
      */
@@ -55,17 +56,16 @@ class Game extends CoreModel
                     `created_at` DATETIME NOT NULL,
                     `updated_at` DATETIME,
                     PRIMARY KEY(`id`),
-                    INDEX (`custom_id`)  
+                    INDEX (`custom_id`)
                 );
             ) {$charset};
         ";
 
         static::executeCreateTableQuery($sql);
-
     }
 
     /**
-     * Update custom table 
+     * Update custom table
      *
      * @param int $id
      * @param mixed $data
@@ -75,7 +75,7 @@ class Game extends CoreModel
     {
         // retrieve the table name
         $tableName = static::getTableName();
-        
+
         // retrieve global $wpdb object
         // DOC https://developer.wordpress.org/reference/classes/wpdb/update/
         $database = static::getDatabase();
@@ -87,7 +87,7 @@ class Game extends CoreModel
     }
 
     /**
-     * Delete rows in DB custom table 
+     * Delete rows in DB custom table
      *
      * @param int $id
      * @return void
@@ -109,11 +109,10 @@ class Game extends CoreModel
         // prepare the request, need to inject the value in the request
         $preparedQuery = $database->prepare(
             $sql, [
-                // les paramètres de la requête doivent respecter l'ordre d'apparition des %* dans la requête
                 $id
             ]
         );
-        // execution de la requête
+
         $database->query($preparedQuery);
     }
 
@@ -123,7 +122,7 @@ class Game extends CoreModel
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -133,7 +132,7 @@ class Game extends CoreModel
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -143,7 +142,7 @@ class Game extends CoreModel
 
     /**
      * Get the value of custom_id
-     */ 
+     */
     public function getCustomId()
     {
         return $this->custom_id;
@@ -153,7 +152,7 @@ class Game extends CoreModel
      * Set the value of custom_id
      *
      * @return  self
-     */ 
+     */
     public function setCustomId($custom_id)
     {
         $this->custom_id = $custom_id;
@@ -163,7 +162,7 @@ class Game extends CoreModel
 
     /**
      * Get the value of game_data
-     */ 
+     */
     public function getGameData()
     {
         return $this->game_data;
@@ -173,7 +172,7 @@ class Game extends CoreModel
      * Set the value of game_data
      *
      * @return  self
-     */ 
+     */
     public function setGameData($game_data)
     {
         $this->game_data = $game_data;
@@ -183,7 +182,7 @@ class Game extends CoreModel
 
     /**
      * Get the value of game_response
-     */ 
+     */
     public function getGameResponse()
     {
         return $this->game_response;
@@ -193,7 +192,7 @@ class Game extends CoreModel
      * Set the value of game_response
      *
      * @return  self
-     */ 
+     */
     public function setGameResponse($game_response)
     {
         $this->game_response = $game_response;
@@ -203,7 +202,7 @@ class Game extends CoreModel
 
     /**
      * Get the value of status
-     */ 
+     */
     public function getStatus()
     {
         return $this->status;
@@ -213,7 +212,7 @@ class Game extends CoreModel
      * Set the value of status
      *
      * @return  self
-     */ 
+     */
     public function setStatus($status)
     {
         $this->status = $status;
@@ -223,7 +222,7 @@ class Game extends CoreModel
 
     /**
      * Get the value of created_at
-     */ 
+     */
     public function getCreatedAt()
     {
         return $this->created_at;
@@ -233,7 +232,7 @@ class Game extends CoreModel
      * Set the value of created_at
      *
      * @return  self
-     */ 
+     */
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
@@ -243,7 +242,7 @@ class Game extends CoreModel
 
     /**
      * Get the value of updated_at
-     */ 
+     */
     public function getUpdatedAt()
     {
         return $this->updated_at;
@@ -253,11 +252,11 @@ class Game extends CoreModel
      * Set the value of updated_at
      *
      * @return  self
-     */ 
+     */
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
 
         return $this;
-    }  
+    }
 }

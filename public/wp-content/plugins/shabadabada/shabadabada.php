@@ -5,7 +5,7 @@
  * Author: Amandine JD Solene
  */
 
-use Shabadabada\Api;
+use Shabadabada\Api\Api;
 use Shabadabada\Plugin;
 
 
@@ -14,12 +14,8 @@ use Shabadabada\Plugin;
 require __DIR__ . '/static-vendor/autoload.php';
 
 
-//class Plugin instanciation 
 $plugin = new Plugin();
-
-// hook registration for the plugin activation and deactivation
-// when the plugin will be activate, wp will call the activate method of the callable $plugin
-// when the plugin will be deactivate, wp will call the deactivate method of the callable $plugin
+// Methods activate and deactivate defines in Plugin.php
 register_activation_hook(__FILE__, [$plugin, 'activate']);
 register_deactivation_hook(__FILE__, [$plugin, 'deactivate']);
 

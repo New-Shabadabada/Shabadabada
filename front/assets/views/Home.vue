@@ -19,7 +19,7 @@
             </div> <!--end of home__catchline-->
 
             <div class="button">
-                <button v-on:click ="rules" class="button__click-here" type="button">Clique ici<button>
+                <button v-on:click ="rules" class="button__click-here" type="button">Clique ici</button>
             </div>
 
         </div> <!--end of home__part1-->
@@ -61,7 +61,7 @@
 
             <div class="button">
                 <router-link :to="{name: 'categoriesList'}">
-                    <button class="button__play" type="button"> Jouer <button>
+                    <button class="button__play" type="button"> Jouer </button>
                 </router-link>
             </div>
 

@@ -1,12 +1,15 @@
 <?php
 
 namespace Shabadabada;
-use Shabadabada\CustomPostType;
-use Shabadabada\Deezer;
-use Shabadabada\DeezerApo;
+
+use Shabadabada\Api\Deezer;
+use Shabadabada\Api\DeezerApo;
+use Shabadabada\Models\Game;
 use Shabadabada\Models\Music;
 use Shabadabada\Models\CoreModel;
-use Shabadabada\Models\Game;
+use Shabadabada\CustomWPFeatures\CustomTaxonomy;
+use Shabadabada\CustomWPFeatures\PostMetadata;
+use Shabadabada\CustomWPFeatures\CustomPostType;
 
 class Plugin
 {
@@ -15,18 +18,22 @@ class Plugin
         $this->registerCustomPostTypes();
         $this->registerCustomTaxonomies();
         $this->registerPostMetada();
-    } 
+    }
 
-
-    //recording custom post type
+    /**
+     * Create new Music CPT
+     * @return void
+     */
     public function registerCustomPostTypes()
     {
         $music = new CustomPostType('music', 'Music');
         $music->register();
     }
 
-
-    
+    /**
+     * Register music type
+     * @return void
+     */
     public function registerCustomTaxonomies()
     {
         $type = new CustomTaxonomy('music-type','Music Type', ['music']);
@@ -34,7 +41,10 @@ class Plugin
     }
 
 
-
+    /**
+     * Register music-title, artist, sound-excerpt, album-name, album-thumbnail fields
+     * @return void
+     */
     public function registerPostMetada()
     {
         $musicMeta = new PostMetadata('music', 'music-title', 'Music Title');
@@ -53,20 +63,23 @@ class Plugin
         $thumbnailMeta->registerThumbnail();
     }
 
-    // call the plugin when is activated
+    /**
+     * Called when the plugin is activated
+     * @return void
+     */
     public function activate()
     {
-        // BUG not working
+        // TODO : import not working at plugin activation, actually, import db in terminal
         //set_time_limit(0);
         //$deezerObject = new DeezerApo();
         //$deezerObject->import();
 
         Game::createTable();
-        //$game = new Game();
-        //$game->createTable();
     }
 
-     // call the plugin when is deactivated
+    /**
+     * Called when the plugin  is deactivated
+    */
     public function deactivate()
     {
         $music = new Music();
@@ -74,5 +87,4 @@ class Plugin
 
         Game::dropTable();
     }
-
 }

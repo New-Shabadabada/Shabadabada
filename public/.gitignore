@@ -1,6 +1,5 @@
-# ignorer les dossiers et fichiers nommés ".cache" dans TOUTE l'aboresence
-# si on avait mis /.cache, on aurait ignoré que les répértoires et les fichiers nommés ".cache" qui se trouveraient à la racine du projet
 .cache
+.parcel-cache
 dist
 node_modules
 package-lock.json

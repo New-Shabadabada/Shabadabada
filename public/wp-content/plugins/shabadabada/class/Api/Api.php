@@ -1,6 +1,6 @@
 <?php
 
-namespace Shabadabada;
+namespace Shabadabada\Api;
 
 use Shabadabada\Models\Music;
 use WP_Query;
@@ -8,28 +8,36 @@ use WP_Query;
 class Api
 {
     protected $baseURI;
+
     public function __construct()
     {
+        // "/Shabadabada/public"
+        $this->baseURI = dirname($_SERVER['SCRIPT_NAME']);
+
         // registering custom roads for the api
         add_action('rest_api_init', [$this, "registerRoute"]);
     }
 
-
-  
+    /**
+     * Routes definition
+     * "/create-game" Record selected songs for a game in the BDD Game table
+     * "/save-game" Record playlist with users responses
+     * @return void
+     */
     public function registerRoute()
     {
-       
+        //
         register_rest_route(
-            'shabadabada/v1',// Record selected songs for a game in the BDD Game table
+            'shabadabada/v1',
             '/create-game',
             [
-                'methods' => 'GET', 
+                'methods' => 'GET',
                 'callback' => [$this, 'createGame'],
             ]
         );
 
         register_rest_route(
-            'shabadabada/v1', // Database record of the validity of the answers given
+            'shabadabada/v1',
             '/save-game',
             [
                 'methods' => 'POST',
@@ -38,71 +46,86 @@ class Api
         );
     }
 
-    
-    public function createGame() 
+
+    /**
+     * Create new Game in db
+     * @return array of game (with custom_id and playlist)
+     */
+    public function createGame()
     {
         // IMPORTANT retrieve category's id or category's slug
         $category = filter_input(\INPUT_GET, 'category');
 
-       
         $musics = new Music();
 
-        // NOTE (int) $category try to convert $category into an integer. If $category is a string (like "toto", or something else) ; this cannot be converted into integer. So the test will fail
+        // (int) $category try to convert $category into an integer. If $category is a string, this cannot be converted into integer. So the test will fail and category slug will be use
         if((int) $category) {
             $playlist = $musics->get_musics_from_category($category, 'term_id');
         }
         else {
             $playlist = $musics->get_musics_from_category($category);
         }
-        
 
         global $wpdb;
 
+        // Create unique id for each game, for more security
         $customId = uniqid('shabada-', true);
 
         $wpdb->insert('wp_game', [
             'custom_id' => $customId,
             'game_data' => json_encode($playlist, JSON_PRETTY_PRINT),
             'created_at' => date('Y-m-d H:i:s'),
-            
         ]);
 
+        // DOC - last insert_id - https://www.php.net/manual/fr/mysqli.insert-id.php
         $lastid = $wpdb->insert_id;
 
         return [
             'gameId' => $lastid,
             'custom_id' => $customId,
             'musics' => $playlist
-            //'jsonVersion' => 1, //! nouveau champ pour futur lointain
+            //'jsonVersion' => 1, //! for future evolution (game, music culture, classification)
         ] ;
     }
 
-    public function saveGame() 
+    /**
+     * Register game with responses user in db
+     * @return array with datas game
+     */
+    public function saveGame()
     {
+        // Define bellow
         $data = $this->getPostData();
+
         global $wpdb;
-        $wpdb->update('wp_game', [
-            'game_response' => json_encode($data, JSON_PRETTY_PRINT)
-        ], [
+        $wpdb->update('wp_game',
+            [
+                'game_response' => json_encode($data, JSON_PRETTY_PRINT)
+            ],
+            [
             'custom_id' => $data['custom_id']
-        ]
+            ]
         );
+
         return $data;
     }
 
-    
-    //------------------------data recovery function---------------------------------
+    /**
+     * Retrieve JSON data of the game and decode this in
+     * @return array $data or $_POST
+     */
     public function getPostData()
     {
         // Retrieving JSON data sent to POST
+        // DOC - file-get-contents - https://www.php.net/manual/fr/function.file-get-contents.php
+        // DOC - wrapper PHP 'php://input' - https://www.php.net/manual/en/wrappers.php.php
         $json = file_get_contents('php://input');
-
-        //var_dump($json);
 
         if($json) {
             // decodes JSON in PHP table
-            // DOC: PHP https://www.php.net/json_decode
+            // DOC: - json_encode - PHP https://www.php.net/json_decode
             $data = json_decode($json, true);
+
             return $data;
         }
         else {
@@ -110,17 +133,10 @@ class Api
         }
     }
 
-
-    
-    //------------------------Action to activate and disable the plugin---------------------------------
-    public function activate()
-    {
-        // Action to activate the plugin
-    }
-
-    public function deactivate()
-    {
-        // Action to deactivate the plugin
-    }
+    /**
+     * Method called when plugin is activate
+     */
+    public function activate(){}
+    public function deactivate(){}
 
 }

@@ -11,7 +11,6 @@ abstract class CoreModel
     abstract public static function delete($id);
     abstract public static function getTableName();
 
-     
     public function __construct()
     {
         $this->database = static::getDatabase();
@@ -24,7 +23,7 @@ abstract class CoreModel
      */
     public static function getDatabase()
     {
-        // DOC wpdb https://developer.wordpress.org/reference/classes/wpdb/
+        // DOC - wpdb - https://developer.wordpress.org/reference/classes/wpdb/
         global $wpdb;
         return $wpdb;
     }
@@ -32,7 +31,7 @@ abstract class CoreModel
     /**
      * Insert rows into our table
      *
-     * @param mixed $data 
+     * @param mixed $data
      * @return void
      */
     public static function insert($data)
@@ -50,7 +49,7 @@ abstract class CoreModel
     /**
      * Create new table
      *
-     * @param mixed $sql 
+     * @param mixed $sql
      * @return void
      */
     public static function executeCreateTableQuery($sql)
@@ -61,7 +60,6 @@ abstract class CoreModel
         // DOC DbDelta https://developer.wordpress.org/reference/functions/dbdelta/
         dbDelta($sql);
     }
-
 
     /**
      * Execute sql request on wpdb
@@ -75,9 +73,8 @@ abstract class CoreModel
         return $database->query($sql);
     }
 
-
     /**
-     * Drop a table in DB 
+     * Drop a table in DB
      *
      * @return void
      */
@@ -90,8 +87,4 @@ abstract class CoreModel
 
         static::execute($sql);
     }
-
-    
-    
-    
 }

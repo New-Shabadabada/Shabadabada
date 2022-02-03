@@ -1,9 +1,9 @@
 <?php
-namespace Shabadabada;
-// creation of a data table to store categories of music in the index and the name of the artist or track or album in the index value
+
+// creation data table to store categories of music in the index and the name of the artist or track or album in the index value
 
 $data = [
-    
+
     'Rock' => [
         'acdc',
         'aerosmith',
@@ -159,7 +159,6 @@ $data = [
         'black-m',
     ],
 
-    
     'Pop' => [
         'alan-walker',
         'alanis-morissette',
@@ -329,7 +328,7 @@ $data = [
             'celebration',
             'in-the-stone',
             'jungle-boogie'
-        ], 
+        ],
         'eruption' => 'one-way-ticket',
 
         'evelyn-thomas' => 'high-energy',
@@ -354,7 +353,7 @@ $data = [
         'shakatak' => 'wonderful',
         'shalamar' => 'i-can-make-you-feel-good',
         'spargo' => [
-            'on-night-affair', 
+            'on-night-affair',
             'you-and-me'
         ],
         'stevie-wonder' => 'sthe-definitive-collection',
@@ -370,7 +369,6 @@ $data = [
         'wham!' => 'wake-me-up-before-you-go-go',
         'patrick-hernandez' => 'born-to-be-alive'
     ],
-    
 
    'Années 80' => [
         'bananarama' => 'true-confessions',
@@ -398,7 +396,7 @@ $data = [
             'true-blue',
         ],
         'michael-jackson' => [
-            'thriller', 
+            'thriller',
             'billie-jean',
             'bad'
         ],
@@ -465,8 +463,7 @@ $data = [
         'jeanne-mas' => 'toute-premiere-fois',
         'peter-et-sloane' => 'besoin-de-rien-envie-de-toi'
     ],
-    
-   
+
     'Années 90' => [
         'kyo' => 'le-chemin',
         'louise-attaque' => 'louise-attaque',
@@ -517,7 +514,7 @@ $data = [
         'mylene-farmer' => 'autre',
         'natalie-imbruglia' => 'left-of-the-middle',
         'nirvana' => 'nevermind',
-        'ophelie-winter' => 'soon',        
+        'ophelie-winter' => 'soon',
         'patrick-bruel' => 'juste-avant',
         'pow-wow' => 'regagner-les-plaines',
         'ricky-martin' => 'ricky-martin',
@@ -537,9 +534,7 @@ $data = [
         ],
         'johnny-hallyday' => 'sang-pour-sang'
     ],
-    
 
-    
     'Années 2000' => [
         'alicia-keys' => 'the-diary-of-alicia-keys',
         'avril-lavigne' => 'let-go',
@@ -629,8 +624,7 @@ $data = [
         'vanessa-paradis' => 'divine-idylle',
         'ciara' => 'the-evolution',
     ],
-    
 ];
-    
+
 
 

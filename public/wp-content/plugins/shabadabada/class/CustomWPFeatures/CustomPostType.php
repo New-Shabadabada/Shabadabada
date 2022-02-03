@@ -1,15 +1,14 @@
 <?php
 
-namespace Shabadabada;
+namespace Shabadabada\CustomWPFeatures;
 
 class CustomPostType
 {
-    //class property statement
     protected $name;
     protected $label;
 
-    //options dedicated to custom post type
-    // DOC https://developer.wordpress.org/resource/dashicons/#format-audio
+    // Options dedicated to custom post type
+    // DOC - Dashicons - https://developer.wordpress.org/resource/dashicons/#format-audio
     protected $options = [
         'label' => 'Custom post type',
         'description' => 'Custom post type',
@@ -28,7 +27,6 @@ class CustomPostType
         'capability_type' => 'post',
         'show_in_rest' => true,
 
-
         'supports' => [
             'title',
             'editor',
@@ -41,25 +39,38 @@ class CustomPostType
     {
         $this->name = $name;
         $this->label = $label;
-
     }
 
-    //launching actions on activation
+    /**
+     * Register at the plugin initialization
+     */
     public function register()
     {
         add_action('init', [$this, 'registerPostType']);
         add_filter('use_block_editor_for_post_type', [$this, 'disableGutemberg'], 10, 2);
         add_action('admin_init', [$this, 'addCapabilitiesToAdmin']);
-
-
     }
 
-    //creation and recording of the cpt
+    /**
+     * Create and record CPT
+     */
     public function registerPostType()
     {
         register_post_type($this->name, $this->getOptions());
     }
 
+    /**
+     * Add authorisation for administrator role
+     */
+    public function addCapabilitiesToAdmin()
+    {
+        return $this->addCapabilitiesToRole('administrator');
+    }
+
+    /**
+     * Create authorization instead of role indicate in parameter
+     * @param $roleName
+     */
     public function addCapabilitiesToRole($roleName)
     {
         // recovery of the role
@@ -82,24 +93,24 @@ class CustomPostType
         $role->add_cap( 'read_private_' .  $this->name . 's' );
 
     }
-    
-    //function that will be used when the user part is created
-    public function addCapabilitiesToAdmin()
-    {
-        return $this->addCapabilitiesToRole('administrator');
-    }
-    
 
+    /**
+     * Attribute roles instead of CPT options
+     * @return array all options of cpt
+     */
     public function getOptions()
     {
-        //assigning roles based on CPT options
         $arguments = $this->options;
         $arguments['label'] = $this->label;
         $arguments['capability_type'] =  $this->name;
         return $arguments;
     }
 
-
+    /**
+     * Deactivate gutenberg editor
+     * @param Bolean
+     * @param PostType
+     */
     public function disableGutemberg($isGutenbergEnable, $postType)
     {
         if($postType === $this->name) {
@@ -109,6 +120,6 @@ class CustomPostType
             return $isGutenbergEnable;
         }
     }
+
 }
 
-    

@@ -1,24 +1,17 @@
 <?php
 
-// Fields to be created in cpt Music :
-// Music title 
-// Artist 
-// Sound excerpt
-// Album thumbnail
+namespace Shabadabada\CustomWPFeatures;
 
-namespace Shabadabada;
-
-
+/**
+ * Allows you to create custom fields in Music CPT
+ */
 class PostMetadata
 {
     // properties that will allow you to create custom Postmetadata
     protected $customPostType;
     protected $name;
     protected $label;
-    
-    /**
-    * Construct method which create a new PostMetadata
-    */
+
     public function __construct($customPostType, $name, $label)
     {
         $this->customPostType = $customPostType;
@@ -29,25 +22,22 @@ class PostMetadata
     }
 
     /**
-     * Register method for create and register new custom post metadata
-     *
+     * Create and register new custom post metadata
      */
     public function registerForm()
-    { 
+    {
         // DOC https://developer.wordpress.org/reference/hooks/edit_form_after_editor/
         add_action('edit_form_after_editor', [$this, 'editForm']);
-    
 
         // DOC https://developer.wordpress.org/reference/hooks/save_post_post-post_type/
         add_action('save_post_' . $this->customPostType, [$this, 'save']);
     }
 
     /**
-     * Register method for create and register new custom post metadata
-     *
+     * Create and register new custom post metadata
      */
     public function registerThumbnail()
-    { 
+    {
         // DOC https://developer.wordpress.org/reference/hooks/edit_form_after_editor/
         add_action('edit_form_after_editor', [$this, 'editThumbnail']);
 
@@ -56,7 +46,7 @@ class PostMetadata
     }
 
     /**
-     * Creation form method
+     * Create form for text field
      */
     public function editForm($post)
     {
@@ -74,7 +64,7 @@ class PostMetadata
 
         // if $values is not empty, we retrieve index 0 of an array wich contains value of metadata
         if(!empty($values)){
-             $value = $values[0]; 
+             $value = $values[0];
         }
         else {
             $value = '';
@@ -89,7 +79,7 @@ class PostMetadata
     }
 
     /**
-     * Creation form method
+     * Create form for image field (for album picture)
      */
     public function editThumbnail($post)
     {
@@ -98,8 +88,8 @@ class PostMetadata
             return false;
         }
 
-        // defintion of values of id and name post_meta
-        // DOC https://developer.wordpress.org/reference/functions/get_post_meta/
+        // definition of values of id and name post_meta
+        // DOC - get_post_meta - https://developer.wordpress.org/reference/functions/get_post_meta/
         $values = get_post_meta(
             $post->ID,
             $this->name,
@@ -107,7 +97,7 @@ class PostMetadata
 
         // if $values is not empty, we retrieve index 0 of an array wich contains value of metadata
         if(!empty($values)){
-             $value = $values[0]; 
+             $value = $values[0];
         }
         else {
             $value = '';
@@ -120,9 +110,11 @@ class PostMetadata
                 <img class="thumbnail" alt="' . $this->label . '" id="' . $this->name . '" src="' . $value . '"/>
             </div>
         ';
-
     }
 
+    /**
+     * Save new field in CPT
+     */
     public function save($postId)
     {
         //retrieve value send with form
@@ -135,5 +127,5 @@ class PostMetadata
             $value
         );
     }
-    
+
 }
